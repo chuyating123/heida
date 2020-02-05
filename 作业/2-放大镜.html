@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #small-box{
+            width: 400px;
+            height: 400px;
+            position: relative;
+            float: left;
+        }
+        #small-box img{
+            width: 100%;
+            height:100%
+        }
+        #drag{
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+        #big-box{
+            width: 400px;
+            height: 400px;
+            position: relative;
+            float: left;
+            display: none;
+            overflow: hidden;
+        }
+        #bigimg{
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+     <div id="small-box">
+        <img src="../天猫/images/6.webp" alt="">
+        <span id="drag"></span>
+     </div>
+     <div id="big-box">
+         <img id="bigimg" src="../天猫/images/6.webp" alt="">
+     </div>
+    </div>
+    <script>
+        var osmallbox=document.getElementById("small-box");
+        var odrag=document.getElementById("drag");
+        var obigbox=document.getElementById("big-box");
+        var oimg=document.getElementById("bigimg");
+        osmallbox.onmouseover=function(){
+            odrag.style.display="inline";
+        }
+        osmallbox.onmousemove=function(e){
+            e=e||window.event;
+            var osmallleft=e.clientX-odrag.offsetWidth/2;
+            var osmalltop=e.clientY-odrag.offsetHeight/2;
+            var xmax=osmallbox.offsetWidth-odrag.offsetWidth;
+            var ymax=osmallbox.offsetHeight-odrag.offsetHeight;
+            if(osmallleft<0){
+                osmallleft=0;
+            }
+            if(osmallleft>xmax){
+                osmallleft=xmax;
+            }
+            if(osmalltop<0){
+                osmalltop=0;
+            }
+            if(osmalltop>ymax){
+                osmalltop=ymax;
+            }
+            odrag.style.left=osmallleft+"px";
+            odrag.style.top=osmalltop+"px";
+            obigbox.style.display="block";
+            var obigleft=(oimg.offsetWidth-obigbox.offsetWidth)*osmallleft/xmax;
+            var obigtop=(oimg.offsetHeight-obigbox.offsetHeight)*osmalltop/ymax;
+            oimg.style.left=-obigleft+"px";
+            oimg.style.top=-obigtop+"px";
+
+        }
+        osmallbox.onmouseup=function(){
+            osmallbox.style.display="none";
+        }
+    </script>
+
+</body>
+</html>

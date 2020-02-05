@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 去除浏览器自带的样式 */
+        #box {
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .content img {
+            width: 500px;
+            height: 500px;
+            display: none;
+        }
+
+        .content {
+            width: 500px;
+            height: 500px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .content .first img {
+            display: block;
+        }
+
+        .title {
+            width: 160px;
+            position: absolute;
+            top: 480px;
+            left: 340px;
+        }
+
+        .title li {
+            background: rgba(0, 0, 0, 0.5);
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+            line-height: 20px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .history li {
+            background: rgba(0, 0, 0, 0.5);
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+            line-height: 20px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .history {
+            width: 60px;
+            position: absolute;
+            left: 10px;
+            bottom: 0px;
+        }
+
+        .title .one {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="title">
+            <li class="one">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <ul class="history">
+            <li id="backbtn">&lt;</li>
+            <li id="nextbtn">&gt;</li>
+        </ul>
+        <ul class="content">
+            <li class="first">
+                <img src="../天猫/images/13.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/14.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/15.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/16.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/17.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+    <script>
+        var btnbox = document.getElementsByClassName("title")[0];
+        var ali = btnbox.getElementsByTagName("li");
+        var btncontent = document.getElementsByClassName("content")[0];
+        var adiv = btncontent.getElementsByTagName("li");
+        var onext = document.getElementById("nextbtn")
+        var oback = document.getElementById("backbtn")
+        var anow = 0;
+            for (var i = 0; i < ali.length; i++) {
+                ali[i].index = i;
+                ali[i].onclick = function () {
+                    for (var j = 0; j < ali.length; j++) {
+                        ali[j].className = "";
+                        adiv[j].className = "";
+                    }
+                    this.className = "one";
+                    adiv[this.index].className = "first";
+                    anow = this.index;
+                }
+            }
+        onext.onclick = function () {
+            anow++;
+            if (anow > ali.length - 1) {
+                anow = 0;
+            }
+            for (var i = 0; i < ali.length; i++) {
+                ali[i].className = "";
+                adiv[i].className = "";
+            }
+            ali[anow].className = "one";
+            adiv[anow].className = "first";
+        }
+        oback.onclick = function () {
+            anow--;
+            if (anow < 0) {
+                anow = ali.length - 1;
+            }
+            for (var i = 0; i < ali.length; i++) {
+                ali[i].className = "";
+                adiv[i].className = "";
+            }
+            ali[anow].className = "one";
+            adiv[anow].className = "first";
+        }
+        timer=setInterval(function(){
+            onext.onclick();
+        },2000);
+        box.onmouseover=function(){
+            clearInterval(timer);
+        }
+        // 局部变量，在外部不可访问，要变成全局变量
+        // 不能写成var timer=...
+        box.onmouseout=function(){
+            timer=setInterval(function(){
+            onext.onclick();
+        },2000);
+        }
+    </script>
+</body>
+
+</html>

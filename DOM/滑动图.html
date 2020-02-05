@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .content {
+            width: 3750px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* transition: left 1s linear; */
+        }
+
+        #box {
+            width: 750px;
+            height: 291px;
+            overflow: hidden;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .content img{
+            width: 750px;
+            float: left;
+        }
+
+        .title {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .history {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+
+        .history li,.title li {
+            width: 20px;
+            height: 20px;
+            float: left;
+            background: rgba(0, 0, 0, 0.5);
+            margin-right: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        /* .title .one {
+            background: red;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id=box>
+        <ul class="title">
+            <li class="one">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <ul class="history">
+            <li id="backbtn">&lt;</li>
+            <li id="nextbtn">&gt;</li>
+        </ul>
+        <ul class="content">
+            <li>
+                <img src="../天猫/images/13.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/14.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/15.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/16.jpg" alt="">
+            </li>
+            <li>
+                <img src="../天猫/images/17.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+    <script>
+         var boxbtn = document.getElementsByClassName("title")[0];
+         var abtn = boxbtn.getElementsByTagName("li");
+         var imgbtn = document.getElementsByClassName("content")[0];
+         for (var i = 0; i < abtn.length; i++) {
+             abtn[i].index = i;
+             abtn[i].click = function () {
+                 for (var j = 0; i < abtn.length; j++) {
+                     abtn[j].className = "";
+                 }
+                 this.className = "one";
+                 imgbtn[i].style.left = -this.index * 750 + "px";
+
+             }
+         }
+
+    </script>
+</body>
+
+</html>
