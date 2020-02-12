@@ -1,0 +1,217 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 0.24rem;
+    background: #f0efed;
+}
+#box{
+   background: #FFD000;
+   height:1.01rem;
+   display: flex;
+}
+.left{
+    height:100%;
+    width: 1.8rem;
+    text-decoration: none;
+}
+.left .word{
+    text-align: center;
+    line-height: 1.01rem;
+    font-size: 0.28rem;
+    color: #222222;
+    font-family: PingFangSC-Medium;
+    margin-left: 0.3rem;
+}
+.left img{
+    width: 0.16rem;
+    height:0.09rem;
+    vertical-align: middle;
+}
+.search{
+    background: #ffffff;
+    border-radius: 0.1rem;
+    height:0.64rem;
+    width: 3.63rem;
+    font-size: .26rem;
+    box-sizing: border-box;
+    color: #999999;
+    margin-top: 0.2rem;
+    display: flex;
+    background: #ffffff url(images/3.png) 0 0.2rem no-repeat;
+    background-size: 0.28rem 0.28rem;
+}
+.search span{
+    margin-left: 0.3rem;
+    text-align: center;
+    line-height: 0.64rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#right{
+    height: 100%;
+    width: 0.94rem;
+}
+#right img{
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-top: 0.2rem;
+    margin-left: 0.2rem; 
+}
+#download{
+    width:6.4rem;
+    height: 1.04rem;
+    background: #000000;
+    padding: 0.16rem 0.25rem 0.16rem 0.16rem;
+    display: flex;
+}
+#download img{
+    width: 0.72rem;
+    height: 0.72rem;
+}
+.title{
+    flex: 1;
+    color: #ffffff;
+    font-size: 0.25rem;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-left: 0.2rem;
+}
+
+#app{
+    width: 1.1rem;
+    height: 0.6rem;
+    background:#FFD000 ;
+    color: #000000;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 0.6rem;
+    margin-right: 0.4rem;
+    margin-top: 0.2rem;
+    text-decoration: none;
+}
+.list{
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap; 
+    border-bottom: 1px solid #DDD8CE;
+    list-style: none;
+}
+.list li{
+    text-align: center;
+    width:20%;
+    height:1.62rem;
+    padding:0.2rem 0;
+    box-sizing: border-box;
+}
+.list span{
+    width: 0.8rem;
+    height: 0.8rem;
+    display: block;
+    margin:0 auto;
+    border-radius: 0.8rem; 
+    line-height: 0.8rem;
+    color:#fff;
+    font-size: 0.34rem;
+}
+.list .food{
+    background: #fd9d21;
+}
+.list .cat{
+    background: #ff6767;
+}
+.list .hotel{
+    background: #8a90fa;
+}
+.list .fun{
+    background: #fed030;
+}
+.list .takeout{
+    background: #fd9d21;
+}
+.list .ktv{
+    background: #fed030;
+}
+.list .travel{
+    background: #4dc6ee;
+}
+.list .girl{
+    background: #ff80c2;
+}
+.list .potato{
+    background: #fd9d21;
+}
+.list .more{
+    background: #00d3be;
+}
+#like-box{
+    margin-top:0.2rem;
+    background: #fff;
+    border-top: 1px solid #DDD8CE;
+    padding-left:0.2rem;
+}
+.yourlike{
+    font-size: 0.34rem;
+    padding: .28rem .2rem;
+    padding-bottom: .2rem;
+    color: #333;
+    border-bottom: 1px solid #DDD8CE;
+}
+.like-list li{
+    border-bottom: 1px solid #DDD8CE;
+}
+.meat{
+    display: flex;
+    padding:0.28rem 0.2rem 0.28rem 0;
+    text-decoration: none; 
+}
+.meat img{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+#like-info{
+    margin-left: 0.2rem;
+    height: 1.64rem;
+    flex: 1;
+}
+.info-title{
+    padding-top: .1rem;
+    margin-bottom: .12rem;
+    font-size: .3rem;
+    font-weight: 400;
+    color: #333;
+}
+.info-desc{
+    display: block;
+    font-size: .24rem;
+    height: .68rem;
+    margin-bottom: .16rem;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.price{
+    position: relative;
+    width: 4rem;
+}
+.money{
+    font-size: .36rem;
+    color: #F60;
+}
+.yuan{
+    font-size: .24rem;
+    color: #F60;
+}
+.menshi{
+    font-size: .24rem;
+    color: #666;
+}
+.sale{
+    position: absolute;
+    top: .04rem;
+    right: 0rem;
+    font-size: .24rem;
+    color: #666;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+       <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 300px;
+            margin:50px auto;
+        }
+        ul{
+            list-style: none;
+        }
+        #box li{
+             float: left;
+             width: 50px;
+             height: 30px;
+             background: #eeeeee;
+             line-height: 30px;
+             text-align: center;
+             border: 1px solid #cccccc;
+             margin-right: 5px;
+        }
+        #box .title{
+            overflow: hidden;
+            cursor: pointer;
+        }
+        #box .thing{
+            background: red;
+        }
+        #content div{
+            width: 350px;
+            height: 100px;
+            background: #eeeeee;
+            border:1px solid #cccccc;
+            display: none;
+        }
+        #content .first{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul class="title">
+            <li class="thing">时事</li>
+            <li>新闻</li>
+            <li>娱乐</li>           
+        </ul>
+        <div id="content">
+            <div class="first">111</div>
+            <div>222</div>
+            <div>333</div>
+        </div>
+    </div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $('li').on('click',function(){
+            $(this).addClass("thing").siblings().removeClass("thing");
+            $('#content div').eq($(this).index()).addClass('first').siblings().removeClass('first');
+        })
+    </script>
+</body>
+</html>
