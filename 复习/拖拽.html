@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+         padding: 0;
+         margin: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+    </div>
+    <script>
+        var odiv=document.getElementById("div1");
+        odiv.onmousedown=function(e){
+            e=e||window.event;
+            var oleft=e.clientX-odiv.offsetLeft;
+            var otop=e.clientY-odiv.offsetTop;
+            document.onmousemove=function(e){
+                e=e||window.event;
+                odiv.style.left=e.clientX-oleft+"px";
+                odiv.style.top=e.clientY-otop+"px";
+            }
+            document.onmouseup=function(){
+                document.onmousemove=null;
+            }
+        }
+    </script>
+</body>
+</html>

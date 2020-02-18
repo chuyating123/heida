@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name,age){
+        //     this.name=name;
+        //     this.age=age;
+        // }
+        // Person.prototype.say=function(){
+        //     console.log("hhh");
+        // }
+        // let p1=new Person('cyt','20');
+        // console.log(p1);
+        // p1.say();
+        // function Coder(name,age,sex){
+        //     Person.call(this,name,age);
+        //     this.sex=sex;
+        // }
+        // Coder.prototype=new Person();
+        // let c1=new Coder('zs','21','man');
+        // console.log(c1);
+        // c1.say();
+        function Person(name,age){
+            this.name=name,
+            this.age=age
+        }
+        Person.prototype.say=function(){
+            console.log('hhhh');
+        }
+        function Coder(name,age,sex){
+            Person.call(this,name,age),
+            this.sex=sex;
+        }
+        let p1=new Person('zs','19')
+        console.log(p1);
+        Coder.prototype=new Person();
+        let c1=new Coder('cyt','20','woman');
+        console.log(c1);
+        c1.say();
+    </script>
+</body>
+</html>

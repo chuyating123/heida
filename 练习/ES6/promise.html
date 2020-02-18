@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // new Promise(function(resolve,reject){
+        //     setTimeout(() => {
+        //         var code=0;
+        //         if(code==1){
+        //             console.log("第一步请求成功，第二步可以发送请求");
+        //             resolve();
+        //         }else{
+        //             reject();
+        //         }
+        //     }, 1000);
+        // }).then(function(){
+        //     setTimeout(() => {
+        //         console.log("第二步请求成功");
+        //     }, 1000);
+        // }).catch(function(){
+        //     console.log("请求失败");
+        // })
+        new Promise(function(resolve,reject){
+            setTimeout(() => {
+                var code=1;
+                if(code==1){
+                    console.log("第一步请求成功，第二步可以发送请求");
+                    resolve();
+                }
+            }, 1000);
+        }).then(function(){
+            setTimeout(() => {
+                console.log("第二步请求成功");
+            }, 1000);
+        }),function(){
+            console.log("请求失败");
+        }
+    </script>
+</body>
+</html>

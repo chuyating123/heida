@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #small {
+            width: 400px;
+            height: 400px;
+            float: left;
+            position: relative;
+        }
+
+        #small img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #drag {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+        #big{
+            width: 400px;
+            height: 400px;
+            display: none;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+        #big-img{
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="small">
+            <img src="../练习/照片墙/img/1.jpg" alt="">
+            <div id="drag"></div>
+        </div>
+        <div id="big">
+            <img id="big-img" src="../练习/照片墙/img/1.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        var odiv=document.getElementById("small");
+        var odrag=document.getElementById("drag");
+        var obig=document.getElementById("big");
+        var oimg=document.getElementById("big-img");
+        odiv.onmouseover=function(){
+            odrag.style.display="block";
+        }
+        odiv.onmousemove=function(e){
+            e=e||window.event;
+            var oleft=e.clientX-odrag.offsetWidth/2;
+            var otop=e.clientY-odrag.offsetHeight/2;
+            var xmax=odiv.offsetWidth-odrag.offsetWidth;
+            var ymax=odiv.offsetHeight-odrag.offsetHeight;
+            if(oleft<0){
+                oleft=0;
+            }
+            if(oleft>xmax){
+                oleft=xmax;
+            }
+            if(otop<0){
+                otop=0;
+            }
+            if(otop>ymax){
+                otop=ymax;
+            }
+            odrag.style.left=oleft+"px";
+            odrag.style.top=otop+"px";
+          obig.style.display="block";
+          var ileft=(oimg.offsetWidth-obig.offsetWidth)*(oleft/xmax);
+          var itop=(oimg.offsetHeight-obig.offsetHeight)*(otop/ymax);
+          oimg.style.left=-ileft+"px";
+          oimg.style.top=-itop+"px";
+        }
+        
+    </script>
+</body>
+
+</html>

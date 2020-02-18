@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 4, 2, 3, 4, 1];
+        // let arr1=new Set(arr);
+        // let arr2=Array.from(arr1);
+        // console.log(arr2);
+        // function fn(arr){
+        //    let obj={};
+        //    let result=[];
+        //    for(var i=0;i<arr.length;i++){
+        //        if(!obj[arr[i]]){
+        //            obj[arr[i]]=1;
+        //            result.push(arr[i]);
+        //        }
+        //        else{
+        //         obj[arr[i]]++; 
+        //        }
+        //    }
+        //    return result;
+        // }
+        // console.log(fn(arr));
+        // let obj = {};
+        // let result = [];
+        // function fn(arr) {
+        //     for (var i = 0; i < arr.length; i++) {
+        //           if(!obj[arr[i]]){
+        //               obj[arr[i]]=1;
+        //               result.push(arr[i]);
+        //           }else{
+        //               obj[arr[i]]++;
+        //           }
+        //     }
+        //     return result;
+        // }
+        // console.log(fn(arr));
+        // let arr1=new Set(arr);
+        // let arr2=[...arr1];
+        // console.log(arr2);
+        // let arr1=new Set(arr);
+        // let arr2=Array.from(arr1);
+        // console.log(arr2);
+        let obj={};
+        let result=[];
+        function fn(arr){
+            for(var i=0;i<arr.length;i++){
+                if(!obj[arr[i]]){
+                    obj[arr[i]]=1;
+                    result.push(arr[1]);
+                }else{
+                    obj[arr[i]]++;
+                }
+                return result;
+            }
+        }
+        console.log(fn(arr));
+
+
+    </script>
+</body>
+
+</html>

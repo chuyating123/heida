@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: #000000;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            transform-style:preserve-3d;
+            margin: 100px auto 0;
+            position: relative;
+        }
+        .box li{
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 100px auto 0;
+            text-align: center;
+            line-height: 200px;
+            font-size: 28px;
+            font-weight: 700;
+            border-radius: 8px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #li1{
+            transform: rotateY(90deg) translateX(100px);
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li id="li1">1</li>
+        <li id="li2">2</li>
+        <li id="li3">3</li>
+        <li id="li4">4</li>
+        <li id="li5">5</li>
+        <li id="li6">6</li>
+    </ul>
+</body>
+</html>

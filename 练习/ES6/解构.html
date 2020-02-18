@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+    </ul>
+    <script>
+        // 复制
+        // let arr=[1,2,3,4];
+        // let arr1=[...arr];
+        // console.log(arr1);
+    //     合并
+    //     let arr=[1,2,3];
+    //     let arr1=[4,5,6];
+    //    let arr2=[...arr,...arr1];
+    //    console.log(arr2);
+    // 把类数组变成数组
+    // var oli=document.getElementsByTagName("li")
+    // let arr=[];
+    // for(var i=0;i<oli.length;i++){
+    //     arr.push(oli[i]);
+    // }
+    // console.log(arr);
+    // let arr1=[...arr];
+    // console.log(arr1);
+    let obj={
+        name:'chuyating',
+        age:20,
+        school:'heida'
+    }
+    let obj1={
+        name:'zs',
+        sex:'woman',
+        id:'20183239'
+    }
+    let obj2={
+        ...obj1,
+        ...obj
+    }
+    console.log(obj2);
+    </script>
+
+</body>
+</html>
