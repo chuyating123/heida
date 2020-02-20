@@ -1,0 +1,10 @@
+$color:green;
+body{
+    background: $color;
+}
+#div1{
+    width: 200px;
+    height: 200px;
+    background: red;
+    transform: translate(100px,100px);
+}
