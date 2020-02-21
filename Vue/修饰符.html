@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div1">
+        <a href="http//www.baidu.com" @click.prevent="fn1()">百度</a>
+        <input type="text" @keyup.enter="fn2()">
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#div1",
+            methods:{
+                fn1(){
+                console.log("123");
+                },
+                fn2(){
+                console.log("回车");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

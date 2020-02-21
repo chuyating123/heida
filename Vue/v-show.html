@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 200px;
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <button  @click="fn()">click</button>
+        <div id="div1" v-show="isshow"></div>
+        <div id="div2"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                isshow: true
+            },
+            methods: {
+                fn() {
+                    this.isshow = !this.isshow;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

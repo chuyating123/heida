@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+      {{vvv}}
+      <span v-text="vvv"></span>
+      <hr>
+      <ul>
+            <li v-for="val in arr">{{val}}</li>
+      </ul>
+      <button @click=fn($event)>click</button>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let v=new Vue({
+            el:"#div1",
+            data:{
+                vvv:'12345',
+                arr:["褚雅婷","张三","李四"]
+            },
+            methods:{
+                fn(event){
+                 console.log("event");
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
