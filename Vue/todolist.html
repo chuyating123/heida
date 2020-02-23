@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        #right {
+            float: right;
+        }
+
+        .pink {
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <h2>todolist</h2>
+        <hr>
+        <div>
+            名称: <input type="text" v-model="proname"placeholder="请输入商品名称">
+            价格: <input type="number" v-model="proprice" placeholder="请输入商品价格">
+            <button @click="add()">添加</button>
+        </div>
+        <div>
+            <input type="text" v-model="searchvalue"@keyup="search()" ><button>搜索</button>
+        </div>
+        <ul>
+            <li v-for="(obj,index) in list" @click="change(obj)" :class="{pink:obj.ischange}" v-if="obj.issearch">
+                <input type="checkbox" v-model="obj.ischange">
+                <span>{{obj.name}}</span>
+                <div id="right">
+                    <span>{{obj.price}}</span>
+                    <span @click.stop="del(index)">[x]</span>
+                </div>
+            </li>
+        </ul>
+        <div>
+            <button @click="delall()">删除选中</button>
+            <span>总价{{totol()}}</span>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                list: [
+                    {
+                        name: "苹果",
+                        price: 5,
+                        ischange: false,
+                        issearch:true
+                    },
+                    {
+                        name: "菠萝",
+                        price: 8,
+                        ischange: false,
+                        issearch:true
+                    }
+                ],
+                proname: "",
+                proprice: "",
+                searchvalue:"",
+                
+            },
+            methods: {
+                add() {
+                    this.list.push({
+                        name: this.proname,
+                        price: Number.parseInt(this.proprice),
+                        ischange: false,
+                        issearch:true
+                    })
+                    this.proName = "";
+                    this.proPrice = "";
+                },
+                change(obj) {
+                    obj.ischange = !obj.ischange
+                },
+                totol() {
+                    let sum = 0;
+                    this.list.forEach(function (obj) {
+                        if (obj.ischange) {
+                            sum += obj.price
+                        }
+                    })
+                    return sum
+                },
+                del(index) {
+                    this.list.splice(index, 1)
+                },
+                delall(){
+                 let arr=this.list.filter(function(obj,index){ 
+                   return !obj.ischange;
+                 })
+                 this.list=arr;
+                },
+                search(){
+                    this.list.forEach((obj,index)=>{
+                        if(obj.name.includes(this.searchvalue)){
+                            obj.issearch=true;
+                        }else{
+                            obj.issearch=false;
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 500px;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .right {
+            float: right;
+        }
+        .pink{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h2>todolist</h2>
+        <hr>
+        <div>
+            名称: <input type="text" v-model="proname">
+            价格: <input type="number" v-model="proprice">
+            <button @click="add()">添加</button>
+        </div>
+        <input type="text" v-model="isinclude"><button @click="search()">搜索</button>
+        <ul>
+            <li v-for="(obj,index) in list" @click="change(obj)" :class="{pink:obj.ischange}" v-if="obj.isinclude">
+                <input type="checkbox" v-model="obj.ischange">
+                <span>{{obj.name}}</span>
+                <div class="right">
+                    <span>{{obj.price}}</span>
+                    <span @click="del(index)">[x]</span>
+                </div>
+            </li>
+        </ul>
+        <div>
+            <button @click="delall()">删除选中</button>
+            <span>总价{{totol()}}</span>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                list: [
+                    {
+                        name:'苹果',
+                        price:3,
+                        ischange:false,
+                        isinclude:true
+                    },
+                    {
+                        name:'西瓜',
+                        price:6,
+                        ischange:false,
+                        isinclude:true
+                    }
+                ],
+                proname:"",
+                proprice:"",
+                isinclude:""
+            },
+            methods:{
+                add(){
+                    this.list.push({
+                        name:this.proname,
+                        price:Number.parseInt(this.proprice),
+                        ischange:false,
+                    })
+                },
+                change(obj){
+                obj.ischange=!obj.ischange
+                },
+                del(index){
+                    this.list.splice(index,1)
+                },
+                totol(){
+                    let sum=0;
+                    this.list.forEach(function(obj){
+                     sum+=obj.price;
+                    })
+                    return sum;
+                },
+                delall(){
+                   let arr= this.list.fliter(function(obj){
+                    return obj.ischange=!obj.ischange;
+                   })
+                this.list=arr;
+                },
+                search(){
+                    this.list.forEach((obj,index)=>{
+                    if(obj.name.includes(this.isinclude)){
+                        obj.isinclude=true
+                    }else{
+                        obj.isinclude=false
+                    }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+    </ul>
+    <script>
+        // 复制数组
+        let arr=[1,2,3,4];
+        let arr1=[...arr];
+        console.log(arr1);
+        // 合并数组
+        let arr2=[...arr,...arr1];
+        console.log(arr2);
+        // 将类数组转化成数组
+        var oli=document.getElementsByTagName("li");
+        // let arr4=[];
+        // for( var i=0;i<oli.length;i++){
+        //     arr4.push(oli[i]);
+        // }
+        let arr4=[...oli];
+        console.log(arr4);
+        // 合并对象
+        let obj={
+            name:"褚雅婷",
+            age:20,
+            school:"黑大"
+        }
+        let obj1={
+            name:"zs",
+            age:21
+        }
+    </script>
+</body>
+</html>
