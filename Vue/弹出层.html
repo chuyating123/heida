@@ -20,14 +20,14 @@
 </head>
 <body>
     <div id="box">
-        <button>登录</button>
+        <button @click="">登录</button>
         <button>注册</button>
-        <mydialog login="登录">
+        <mydialog title="登录">
             用户名:<input type="text">
             密码:<input type="text">
             <button>登录</button>
         </mydialog>
-        <mydialog login="注册">
+        <mydialog title="注册">
             用户名:<input type="text">
             密码:<input type="text">
             确认密码: <input type="text">
@@ -37,13 +37,13 @@
     <script src="vue.js"></script>
     <template id="temp">
         <div id="dialogbox">
-            <div class="title">
-                {{login}}
+            <div class="titlebox">
+                {{title}}
                 <span>X</span>
             </div>
-        </div>
-        <div id="content">
-            <slot></slot>
+            <div id="content">
+                <slot></slot>
+            </div>
         </div>
     </template>
     <script>
@@ -55,7 +55,7 @@
            components:{
                "mydialog":{
                template:"#temp",
-               props:["login"]
+               props:["title"]
                }
            }
        })
