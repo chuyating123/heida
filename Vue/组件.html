@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+    <hello title="标题1"container="内容1">
+        <div slot="slot1">
+            <img src="../天猫/images/15.jpg" alt="">
+        </div>
+        
+    </hello>
+    </div>
+    <script src="vue.js"></script>
+    <template id="temp">
+        <div>
+            <slot name='slot1'></slot>
+            <h2>标题是:{{title}}</h2>
+            <p>内容是：{{container}}</p>
+            <slot name="slot2"></slot>
+        </div>
+    </template>
+    <script>
+        Vue.component("hello",{
+            template:"#temp",
+            props:["title","container"]
+        })
+        new Vue({
+            el:"#box",
+        })
+    </script>
+</body>
+</html>
