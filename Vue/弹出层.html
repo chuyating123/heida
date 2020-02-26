@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #box{
+        #box {
             margin: 0 auto;
         }
-        #dialogbox{
+
+        #dialogbox {
             width: 300px;
             height: 200px;
-            border:1px solid #000000
+            border: 1px solid #000000
         }
-        .title{
+
+        .title {
             border-bottom: 1px solid #eeeeee;
+        }
+        .right{
+            width: 20px;
+            height: 20px;
+            float: right;
+            margin-right: 10px;
+        }
+        .right :hover{
+            background: red;
+            color: #ffffff;
         }
     </style>
 </head>
+
 <body>
     <div id="box">
-        <button @click="">登录</button>
-        <button>注册</button>
-        <mydialog title="登录">
+        <button @click="login()">登录</button>
+        <button @click="register()" >注册</button>
+        <mydialog title="登录" v-if="isloginshow">
             用户名:<input type="text">
             密码:<input type="text">
             <button>登录</button>
         </mydialog>
-        <mydialog title="注册">
+        <mydialog title="注册" v-if="isregistershow">
             用户名:<input type="text">
             密码:<input type="text">
             确认密码: <input type="text">
@@ -38,8 +52,8 @@
     <template id="temp">
         <div id="dialogbox">
             <div class="titlebox">
-                {{title}}
-                <span>X</span>
+                <div id="left">{{title}}</div>
+                <div class="right">X</div>
             </div>
             <div id="content">
                 <slot></slot>
@@ -47,18 +61,30 @@
         </div>
     </template>
     <script>
-       new Vue({
-           el:"#box",
-           data:{
-
-           },
-           components:{
-               "mydialog":{
-               template:"#temp",
-               props:["title"]
-               }
-           }
-       })
+        new Vue({
+            el: "#box",
+            data: {
+                isloginshow:false,
+                isregistershow:false
+            },
+            components: {
+                "mydialog": {
+                    template: "#temp",
+                    props: ["title"]
+                }
+            },
+             methods: {
+                    login() {
+                        this.isloginshow =true,
+                            this.isregistershow = false
+                    },
+                    register() {
+                        this.isloginshow = false,
+                            this.isregistershow = true
+                    }
+                }
+        })
     </script>
 </body>
+
 </html>
