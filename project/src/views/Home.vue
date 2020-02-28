@@ -1,17 +1,18 @@
 <template>
-  <div class="home">
-    我是首页
-  </div>
+    <div>
+        我是首页
+          <router-link to="/Home/Baby">Baby</router-link>
+          <router-view></router-view>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    export default {
+        
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+    }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

@@ -1,6 +1,8 @@
 <template>
     <div>
     我是详情页
+    {{$route.query.id}}
+     {{$route.query.name}}
     </div>
 </template>
 

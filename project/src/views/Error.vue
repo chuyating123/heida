@@ -1,9 +1,6 @@
 <template>
     <div>
-     我是测试页
-     {{$route.query.id}}
-      {{$route.query.name}}
-      {{$store.state.count}}
+    哎呦~ 页面找不到了
     </div>
 </template>
 

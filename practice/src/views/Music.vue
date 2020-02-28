@@ -1,9 +1,6 @@
 <template>
     <div>
-     我是测试页
-     {{$route.query.id}}
-      {{$route.query.name}}
-      {{$store.state.count}}
+     音乐
     </div>
 </template>
 
