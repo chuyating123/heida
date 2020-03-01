@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <comment-header ></comment-header>
-    <div class="container">12345</div>
+    <div class="container">
+      <router-view></router-view>
+    </div>
     <comment-footer></comment-footer>
   </div>
 </template>

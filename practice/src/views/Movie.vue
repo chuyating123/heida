@@ -1,14 +1,15 @@
 <template>
   <div>
     <ul class="list">
-      <li class="movie-list" v-for="obj in movielist" :key="obj.id"> 
+      <li class="movie-list" v-for="obj in movielist" :key="obj.id" @click="goDetail(obj.id)"> 
         <img :src="obj.images.medium" alt />
         <div class="desc">
           <h3>{{obj.original_title}}</h3>
-          <p>{{obj.casts}}</p>
-          <p>207147已观看</p>
+          <span v-for="cast in obj.casts" :key="cast.id">{{cast.name}}  </span>
+          <br>
+          <span v-for="genre in obj.genres" :key="genre.id">{{genre}}  </span>
           <p>年份：2019</p>
-          <p>剧情</p>
+          <p>时长:{{obj.durations[0]}}</p>
         </div>
       </li>
     </ul>
@@ -31,6 +32,11 @@ export default {
       }).catch((res)=>{
           console.log(res)
       })
+  },
+  methods:{
+   goDetail(id){
+     this.$router.push({path:"/MovieDetail",query:{id}})
+   }
   }
 };
 </script>
