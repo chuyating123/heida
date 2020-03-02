@@ -33,12 +33,11 @@ export default {
         "https://bird.ioliu.cn/v1?url=https://douban.uieee.com/v2/movie/subject/" +
           this.$route.query.id
       )
-      .then(res => {
-        // console.log(res.data)
+      .then((res) => {
         this.movie = res.data;
         this.isloading=false
       })
-      .catch(res => {
+      .catch((res) => {
         console.log(res);
       });
   }

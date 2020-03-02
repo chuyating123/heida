@@ -1,20 +1,18 @@
 <template>
-    <div class="book">
-     图书
+    <div>
+     <BookDetail></BookDetail>
     </div>
 </template>
 
 <script>
+import BookDetail from '../components/BookDetail'
     export default {
-        
+        components:{
+            BookDetail
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-.book{
-    width: 100%;
-    height: 1rem;
-    background:fuchsia;
-    color: #ffffff
-}
+
 </style>

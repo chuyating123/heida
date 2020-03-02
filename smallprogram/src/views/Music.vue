@@ -1,6 +1,6 @@
 <template>
     <div >
-   <img v-for="obj in Musiclist" :key="obj.id" :src="obj.bg" alt="">
+   <img v-for="obj in Musiclist" :key="obj.id" :src="obj.bg" alt="" @click="$router.push({path:'/MusicDetail',query:{id:obj.id}})">
     </div>
 </template>
 
@@ -17,7 +17,7 @@ import axios from 'axios'
         .then((res)=>{
             this.Musiclist=res.data.albums
         }).catch((res)=>{
-            console.log(res.data)
+            console.log(res)
         })
         }
     }

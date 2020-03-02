@@ -17,22 +17,22 @@ export default {
     return {
       menu: [
         {
-          path: "/movie",
+          path: "/Movie",
           name: "电影",
           color: 'red'
         },
         {
-          path: "/music",
+          path: "/Music",
           name: "音乐",
           color: 'green'
         },
         {
-          path: "/book",
+          path: "/Book",
           name: "图书",
           color: 'blue'
         },
         {
-          path: "/image",
+          path: "/Image",
           name: "图片",
           color: 'pink'
         }
@@ -41,10 +41,12 @@ export default {
   },
     created(){
         this.menu.forEach((obj,index)=> {
-            if(obj.path==this.$route.path){
+            if(this.$route.path.includes(obj.path)){
      this.$store.commit('change',obj);
-    }
-        })
+            }
+    // console.log(this.$route.path)
+    // console.log(obj.path)
+      })
     }
 };
 </script>

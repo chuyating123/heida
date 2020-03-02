@@ -1,6 +1,6 @@
 <template>
     <div>
-    <img src="" alt="">
+    <img v-for="obj in musiclist" :key="obj.id" :src="obj.bg" alt="">
     </div>
 </template>
 
@@ -15,7 +15,7 @@ import axios from 'axios'
         created(){
             axios.get('data/musiclist.json')
             .then((res)=>{
-            this.musiclist=res.data
+            this.musiclist=res.data.albums
             })
             .catch((res)=>{
                 console.log(res)
