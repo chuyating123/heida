@@ -32,7 +32,7 @@ export default {
           color: 'blue'
         },
         {
-          path: "/Image",
+          path: "/Photo",
           name: "图片",
           color: 'pink'
         }

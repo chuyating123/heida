@@ -24,7 +24,7 @@
                      {
                         path:"/Book",
                         name:"图书",
-                        color:"blue"
+                        color:"orange"
                     },
                      {
                         path:"/Photo",

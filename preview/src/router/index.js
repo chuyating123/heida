@@ -4,6 +4,8 @@ import Movie from './../views/Movie'
 import Music from './../views/Music'
 import Book from './../views/Book'
 import Photo from './../views/Photo'
+import MovieDetail from '../views/MovieDetail'
+import MusicDetail from '../views/MusicDetail'
 
 Vue.use(VueRouter)
 
@@ -28,6 +30,16 @@ const routes = [
     component:Photo,
     name:"Photo"
   },
+  {
+    path:"/MovieDetail",
+    component:MovieDetail,
+    name:"MovieDetail"
+  },
+  {
+    path:"/MusicDetail",
+    component: MusicDetail,  
+    name:"MusicDetail"
+  }
 ]
 
 const router = new VueRouter({
