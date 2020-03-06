@@ -25,7 +25,7 @@ export default {
             }
         },
         created(){
-            axios.get('data/musicdata')
+            axios.get('data/musicdata.json')
             .then((res)=>{
                 this.musiclist=res.data.musicData
             })
