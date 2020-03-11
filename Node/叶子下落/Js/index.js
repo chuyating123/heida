@@ -1,4 +1,4 @@
-require('[./leaf]',function(Leaf){
+require(['./leaf'],function(Leaf){
     var ocontainer=document.getElementById('container');
     var oscreen=document.documentElement.clientWidth;
     for(var i=0;i<4;i++){
@@ -7,7 +7,7 @@ require('[./leaf]',function(Leaf){
         var leaf=new Leaf({
             width:owidth,
             left:oleft,
-            container:oContainer,
+            container:ocontainer,
         });
         leaf.fall();
     }

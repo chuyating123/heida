@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 500px;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .list {
+            width: 400px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .pink {
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+    <div id="box">
+        <h3>todolist</h3>
+        <hr>
+        <div>
+            名称: <input type="text" v-model="proname">
+            价格: <input type="number" v-model="proprice">
+            <button @click="add()">添加</button>
+        </div>
+        <input type="text" v-model="searchvalue"@keyup="search()"><button>搜索</button>
+        <ul>
+            <li class="list" v-for="(obj,index) in menu" @click="change(obj)" :class="{pink:obj.ischange}" v-if="obj.issearch">
+                <div class="left">
+                    <input type="checkbox" v-model="obj.ischange">
+                    <span>{{obj.name}}</span>
+                </div>
+                <div class="right">
+                    <span>{{obj.price}}</span>
+                    <span @click="del(index)">[x]</span>
+                </div>
+            </li>
+            <button @click="delall()">删除选中</button><span>总价{{all()}}</span>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                menu: [
+                    {
+                        name: "苹果",
+                        price: 5,
+                        ischange: false,
+                        issearch:true
+                    },
+                    {
+                        name: "葡萄",
+                        price: 6,
+                        ischange: false,
+                        issearch:true
+                    }
+                ],
+                proname: "",
+                proprice: "",
+                searchvalue:""
+            },
+            methods: {
+                add() {
+                    this.menu.push({
+                        name: this.proname,
+                        price: Number.parseInt(this.proprice),
+                        ischange: false,
+                        issearch:true
+                    })
+                    this.proname = "";
+                    this.proprice = "";
+                    this.searchvalue=""
+                },
+                change(obj) {
+                    obj.ischange = !obj.ischange
+                },
+                del(index) {
+                    this.list.splice(index, 1)
+                },
+                delall() {
+                    let arr = this.menu.filter(function (obj, index) {
+                        return !obj.ischange
+                    })
+                    this.menu = arr;
+                },
+                all(){
+                    let sum=0;
+                    this.menu.forEach(function(obj){
+                        if(obj.ischange){
+                            sum+=obj.price;
+                        }
+                    })
+                    return sum;
+                },
+                search(){
+                    this.menu.forEach((obj,index)=>{
+                       if(obj.name.includes(this.searchvalue)){
+                           obj.issearch=true
+                       }else{
+                           obj.issearch=false;
+                       }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

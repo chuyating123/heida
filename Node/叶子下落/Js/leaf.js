@@ -6,11 +6,12 @@ define(function(require,exports,module){
         this.oimg.src='img/'+(parseInt(Math.random()*4)+1)+'.png',
         this.oimg.width=this.width,
         this.oimg.style.left=this.left+"px",
-        options.container.appendChild(this.oImg);
+        options.container.appendChild(this.oimg);
     }
     Leaf.prototype.fall=function(){
+        var that=this;
         setInterval(function(){
-        this.oimg.style.top=this.oimg.offsetwidth+5+"px"
+        that.oimg.style.top=that.oimg.offsetTop+5+"px"
         },Math.random()*500)
     }
     module.exports=Leaf;
