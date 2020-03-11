@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header></Header>
-    <router-view></router-view>
+    <div class="container">
+  <router-view></router-view>
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -22,7 +24,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.container{
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
 #nav {
   padding: 30px;
 

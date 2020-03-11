@@ -53,14 +53,18 @@ footer {
   text-align: center;
   line-height: 1rem;
   display: flex;
+  position: fixed;
+    bottom: 0;
   a {
     width: 25%;
     height: 1rem;
     line-height: 1rem;
     text-align: center;
-    font-size: 0.2rem;
+    font-size: 0.3rem;
+  .router-link-active {
     color: #ffffff;
     text-decoration: none;
+  }
   }
 }
 </style>

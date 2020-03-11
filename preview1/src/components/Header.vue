@@ -18,5 +18,7 @@ header{
     color: #ffffff;
     text-align: center;
     line-height: 1rem;
+    position: fixed;
+    top: 0;
 }
 </style>
