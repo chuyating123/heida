@@ -43,28 +43,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-footer {
-  width: 100%;
+// footer {
+  // width: 100%;
+  // height: 1rem;
+  // background: red;
+  // position: fixed;
+  // bottom: 0px;
+  // text-align: center;
+  // line-height: 1rem;
+  // display: flex;
+  // a {
+  //   flex: 1;
+  //   text-align: center;
+  //   font-size: 0.3rem;
+  // }
+  // .router-link-active {
+  //   color: #ffffff;
+  //   text-decoration: none;
+  // }
+  footer {
   height: 1rem;
+  width: 100%;
   background: red;
-  color: #ffffff;
-  position: fixed;
-  bottom: 0;
-  text-align: center;
   line-height: 1rem;
-  display: flex;
+  text-align: center;
   position: fixed;
-    bottom: 0;
+  bottom: 0px;
+  display: flex;
   a {
-    width: 25%;
-    height: 1rem;
-    line-height: 1rem;
     text-align: center;
-    font-size: 0.3rem;
+    flex: 1;
+    color: #000000;
+    font-size: 14px;
+  }
   .router-link-active {
     color: #ffffff;
     text-decoration: none;
   }
-  }
 }
+// }
 </style>

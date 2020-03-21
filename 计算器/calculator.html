@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            margin: 0 auto;
+        }  
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        请输入数值<input type="number">
+        <br>
+        结果是<input type="number">
+        <div class="list">
+            <span class="one" v-for="obj in first">
+                <button>{{obj.num}}</button>
+            </span>
+            <br>
+            <span class="two" v-for="obj in seconed">
+                <button>{{obj.num}}</button>
+            </span>
+            <br>
+            <span class="three" v-for="obj in third">
+                <button>{{obj.num}}</button>
+            </span>
+            <br>
+            <span class="four" v-for="obj in forth">
+                <button>{{obj.num}}</button>
+            </span>
+            </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+           first:[
+               {
+                   num:7
+               },
+               {
+                   num:8
+               },
+               {
+                   num:9
+               },
+               {
+                   num:'/'
+               },
+           ],
+           seconed:[
+               {
+                   num:4
+               },
+               {
+                   num:5
+               },
+               {
+                   num:6
+               },
+               {
+                   num:'x'
+               },
+           ],
+           third:[
+               {
+                   num:1
+               },
+               {
+                   num:2
+               },
+               {
+                   num:3
+               },
+               {
+                   num:'-'
+               },
+           ],
+           forth:[
+               {
+                   num:0
+               },
+               {
+                   num:'.'
+               },
+               {
+                   num:'='
+               },
+               {
+                   num:'+'
+               },
+           ]
+            },
+            methods: {
+
+            }
+
+        })
+    </script>
+
+</body>
+</html>

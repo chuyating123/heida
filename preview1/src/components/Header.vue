@@ -19,6 +19,6 @@ header{
     text-align: center;
     line-height: 1rem;
     position: fixed;
-    top: 0;
+    top: 0px;
 }
 </style>

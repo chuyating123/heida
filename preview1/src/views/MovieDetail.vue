@@ -1,13 +1,16 @@
 <template>
-  <div>
+  <div v-if="!isloading">
     <div class="detail-list">
-      <img :src="detail.images.medium" alt />
+      <img :src="moviedetail.images.medium" alt />
       <div class="right">
-        <h2>{{detail.original_title}}</h2>
-        <span>{{detail.durations[0]}}</span>
+        <h2>{{moviedetail.original_title}}</h2>
+        <span>{{moviedetail.durations[0]}}</span>
       </div>
     </div>
-      <div class="bottum">{{detail.summary}}</div>
+    <div class="bottum">{{moviedetail.summary}}</div>
+    <div class="loading" v-if="isloading">
+      <img src="./../assets/images/loading.gif" alt />
+    </div>
   </div>
 </template>
 
@@ -16,7 +19,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      detail: {}
+      moviedetail: {},
+      isloading:true
     };
   },
   created() {
@@ -26,7 +30,8 @@ export default {
           this.$route.query.id
       )
       .then(res => {
-        this.detail = res.data;
+        this.moviedetail = res.data;
+        this.isloading=false
       })
       .catch(res => {
         console.log(res);
@@ -39,9 +44,19 @@ export default {
 .detail-list {
   display: flex;
   img {
-    width: 50%;
+    flex: 1;
     height: 5rem;
     margin-right: 0.1rem;
   }
+  .right {
+    flex: 1;
+  }
+}
+.loading{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1rem;
 }
 </style>

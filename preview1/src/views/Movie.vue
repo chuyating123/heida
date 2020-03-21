@@ -1,6 +1,6 @@
 <template>
   <div>
-  <ul>
+  <ul class="box" v-if="!isloading">
       <li class="list" v-for="obj in movie" :key="obj.id" @click="$router.push({path:'/MovieDetail',query:{id:obj.id}})">
        <img :src="obj.images.medium" alt="">
        <div class="right">
@@ -13,6 +13,9 @@
        </div>
       </li>
   </ul>
+  <div class="loading" v-if="isloading">
+      <img src="./../assets/images/loading.gif" alt />
+    </div>
   </div>
 </template>
 
@@ -21,7 +24,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-        movie:[]
+        movie:[],
+        isloading:true
     };
   },
   created() {
@@ -31,6 +35,7 @@ export default {
       )
       .then(res => {
         this.movie=res.data.subjects;
+        this.isloading=false
       })
       .catch(res => {
         console.log(res);
@@ -40,15 +45,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-    width: 100%;
-    height: 2rem;
+.box{
+  padding: 0.1rem;
+  .list{
+   color: #000000;
     display: flex;
     padding: 0.1rem;
     img{
         width: 2rem;
-        height: 100%;
+        height: 1.6rem;
         margin-right: 0.1rem;
     }
+    .right{
+      flex: 1;
+    }
 }
+}
+.loading{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1rem;
+}
+
+
 </style>

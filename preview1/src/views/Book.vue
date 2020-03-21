@@ -1,15 +1,16 @@
 <template>
-    <div>
-   图书
-    </div>
+  <BookDetail>
+  </BookDetail>
 </template>
 
 <script>
-    export default {
-        
-    }
+import BookDetail from '../components/BookDetail'
+export default {
+  components:{
+      BookDetail
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>

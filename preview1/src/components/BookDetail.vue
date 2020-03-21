@@ -1,11 +1,12 @@
+
 <template>
   <div>
-    <transition-group tag="ul" name="fade" class="book-box">
-      <li v-for="(img,index) in imgs" :key="index" class="book-list" v-show="index==num">
+    <transition-group tag="ul" class="book-box" name="fade">
+      <li class="book-list" v-for="(img,index) in imgs" :key="index" v-show="index==num">
         <img :src="img" alt />
       </li>
     </transition-group>
-    <ul class="btn-box">
+    <ul class="btns">
       <li :class="{btn:true,active:index==num}" v-for="(img,index) in imgs" :key="index"></li>
     </ul>
   </div>
@@ -15,10 +16,14 @@
 export default {
   data() {
     return {
+      imgs: [
+        "https://img3.doubanio.com/lpic/s24468373.jpg",
+        "https://img3.doubanio.com/lpic/s27102925.jpg",
+        "https://img3.doubanio.com/lpic/s6989253.jpg"
+      ],
       num: 0
     };
   },
-  props: ["imgs"],
   created() {
     setInterval(() => {
       this.num++;
@@ -32,8 +37,8 @@ export default {
 
 <style lang="scss" scoped>
 .book-box {
-  position: relative;
   height: 6rem;
+  position: relative;
   .book-list {
     position: absolute;
     left: 0px;
@@ -46,14 +51,15 @@ export default {
     }
   }
 }
-.btn-box {
+.btns {
   display: flex;
   justify-content: center;
   .btn {
     width: 0.2rem;
     height: 0.2rem;
-    background: #cccccc;
     border-radius: 50%;
+    background: #cccccc;
+    margin-right: 0.1rem;
   }
   .active {
     background: red;
