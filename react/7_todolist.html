@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+
+    <script type="text/babel">
+        class Todolist extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    todos: [
+                        {
+                            name: '吃饭',
+                            isactive: false
+                        },
+                        {
+                            name: '睡觉',
+                            isactive: false
+                        },
+                        {
+                            name: '敲代码',
+                            isactive: false
+                        }
+                    ]
+                }
+                this.addFn = this.addFn.bind(this);
+                this.changeFn = this.changeFn.bind(this);
+                this.delFn=this.delFn.bind(this);
+
+            }
+            addFn(val) {
+                this.setState({
+                    todos: [...this.state.todos, {name:val,isActive:false}]
+                })
+            }
+            changeFn(index) {
+                let todos = [...this.state.todos];
+                todos[index].isactive = !todos[index].isactive;
+                this.setState({
+                    todos
+                })
+
+            }
+            delFn(index){
+                let todos=[...this.state.todos];
+                todos.splice(index,1);
+                this.setState({
+                    todos
+                })
+            }
+            render() {
+                return (
+                    <div>
+                        <h3>todolist</h3>
+                        <Search />
+                        <Add addFn={this.addFn}></Add>
+                        <List todos={this.state.todos} changeFn={this.changeFn} delFn={this.delFn}></List>
+                    </div>
+                )
+            }
+        }
+        class Search extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <input type="text" />
+                        <button>搜索</button>
+                    </div>
+                )
+            }
+        }
+        class Add extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <input id="addValue" ref={input => this.myInput = input} type="text" />
+                        <button onClick={() => {
+                            this.props.addFn(this.myInput.value);
+                            this.myInput.value = "";
+                        }}>添加</button>
+                    </div>
+                )
+            }
+        }
+        class List extends React.Component {
+            render() {
+                return (
+                    <ul>
+                        {
+                            this.props.todos.map((obj, index) => {
+                                return (
+                                    <li
+                                        onClick={() => {
+                                            this.props.changeFn(index)
+                                        }}
+                                        key={index}
+                                        className={obj.isactive ? 'red' : ""}
+                                    >{obj.name}
+                                        <button onClick={(e) => {
+                                            this.props.delFn(index)
+                                            e.stopPropagation()
+                                        }
+                                        }>del</button>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Todolist />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+
+</html>
