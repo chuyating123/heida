@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+        }
+        li.red{
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Todolist extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    menu: [
+                        {
+                            name: '苹果',
+                            isactive:false,
+                            isshow:true
+                        },
+                        {
+                            name: '香蕉',
+                            isactive:false,
+                            isshow:true
+                        },
+                        {
+                            name: '菠萝',
+                            isactive:false,
+                            isshow:true
+                        }
+                    ]
+                }
+                this.addFn=this.addFn.bind(this);
+                this.changeFn=this.changeFn.bind(this);
+                this.delFn=this.delFn.bind(this);
+                this.searchFn=this.searchFn.bind(this)
+            }
+            addFn(val){
+             this.setState({
+                 menu:[...this.state.menu,{name:val,isactive:false,isshow:true}]
+             })
+            }
+            searchFn(val){
+                let menu=[...this.state.menu];
+                menu.forEach((obj,index)=>{
+                    if(obj.name.includes(val)){
+                        obj.isshow=true
+                    }else{
+                        obj.isshow=false;
+                    }
+                })
+
+            }
+            changeFn(index){
+              let menu=[...this.state.menu];
+              menu[index].isactive=!menu[index].isactive;
+              this.setState({
+                  menu
+              })
+            }
+            delFn(index){
+                let menu=[...this.state.menu];
+                menu.splice(index,1);
+                this.setState({
+                    menu
+                })
+
+            }
+            render() {
+                return (
+                    <div>
+                        <h1>todolist</h1>
+                        <Search searchFn={this.searchFn}></Search>
+                        <Add addFn={this.addFn}></Add>
+                        <List menu={this.state.menu} changeFn={this.changeFn} delFn={this.delFn}></List>
+                    </div>
+                )
+            }
+        }
+        class Search extends React.Component {
+            constructor() {
+                super()
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={input => this.myInput = input}/>
+                        <button onClick={()=>{
+                            this.props.searchFn(this.myInput.value)
+                        }}>搜索</button>
+                    </div>
+                )
+            }
+        }
+        class Add extends React.Component {
+            constructor() {
+                super()
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={input => this.myInput = input} />
+                        <button onClick={()=>{
+                           this.props.addFn( this.myInput.value)
+                           this.myInput.value=""
+                        }}>添加</button>
+                    </div>
+                )
+            }
+        }
+        class List extends React.Component {
+            constructor() {
+                super()
+            }
+            render() {
+                return (
+                    <ul>
+                        {
+                           this.props.menu.map((obj,index)=>{
+                               return(
+                                   <div>
+                                   <li key={index} onClick={()=>{
+                                       this.props.changeFn(index)
+                                   }}
+                                   className={obj.isactive?'red':''+" "+obj.isshow?'show':''}>
+                                    {obj.name}
+                                    <button onClick={(e)=>{
+                                        this.props.delFn(index);
+                                        e.stopPropagation()
+                                    }}>del</button>
+                                    </li>
+                                    </div>
+                               )
+                           })
+                        }
+                    </ul>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Todolist></Todolist>,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+
+</html>

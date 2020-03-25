@@ -9,6 +9,12 @@
         .red {
             background: red;
         }
+        li{
+            display: none;
+        }
+        li.show{
+            display: block;
+        }
     </style>
 </head>
 
@@ -26,21 +32,25 @@
                     todos: [
                         {
                             name: '吃饭',
-                            isactive: false
+                            isactive: false,
+                            isShow:true
                         },
                         {
                             name: '睡觉',
-                            isactive: false
+                            isactive: false,
+                            isShow:true
                         },
                         {
                             name: '敲代码',
-                            isactive: false
+                            isactive: false,
+                            isShow:true
                         }
                     ]
                 }
                 this.addFn = this.addFn.bind(this);
                 this.changeFn = this.changeFn.bind(this);
                 this.delFn=this.delFn.bind(this);
+                this.searchFn=this.searchFn.bind(this);
 
             }
             addFn(val) {
@@ -63,13 +73,26 @@
                     todos
                 })
             }
+            searchFn(val){
+               let todos=[...this.state.todos];
+               todos.forEach((obj,index)=>{
+               if(obj.name.includes(val)){
+                   obj.isShow=true;
+               }else{
+                   obj.isShow=false;
+               }
+               })
+              this.setState({
+                  todos
+              })
+            }
             render() {
                 return (
                     <div>
                         <h3>todolist</h3>
-                        <Search />
+                        <Search searchFn={this.searchFn}></Search>
                         <Add addFn={this.addFn}></Add>
-                        <List todos={this.state.todos} changeFn={this.changeFn} delFn={this.delFn}></List>
+                        <List todos={this.state.todos} changeFn={this.changeFn} delFn={this.delFn} ></List>
                     </div>
                 )
             }
@@ -78,7 +101,10 @@
             render() {
                 return (
                     <div>
-                        <input type="text" />
+                        <input id="search" type="text" onChange={(e)=>{
+                            this.props.searchFn(e.target.value);
+                            console.log('111')
+                        }}/>
                         <button>搜索</button>
                     </div>
                 )
@@ -103,13 +129,15 @@
                     <ul>
                         {
                             this.props.todos.map((obj, index) => {
+                                let isactive = obj.isactive?'red':'';
+                                let isShow = obj.isShow?'show':'';
                                 return (
                                     <li
                                         onClick={() => {
                                             this.props.changeFn(index)
                                         }}
                                         key={index}
-                                        className={obj.isactive ? 'red' : ""}
+                                        className={isactive+" "+isShow}
                                     >{obj.name}
                                         <button onClick={(e) => {
                                             this.props.delFn(index)
