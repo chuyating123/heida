@@ -26,7 +26,7 @@ class CourseList extends Component {
                     {
                         this.state.list.map(res=>(
                             <li key={res.id}>
-                                <Link to={`/CourseDetail/${res.id}.json`}>{res.title}</Link>
+                                <Link to={`/CourseDetail/${res.id}`}>{res.title}</Link>
                             </li>
                         ))
                     }
