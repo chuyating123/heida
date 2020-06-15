@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>计算器</title>
+  <style type="text/css">
+   p{
+    text-align: center;
+                font-size: 16px;
+   }
+   .box{
+    margin:  0 auto;
+    width: 215px;
+    height: 245px;
+    border: 1px solid red;
+   }
+   .sty{
+    width: 50px;
+    height: 30px;
+    margin-top: 6px;
+    border-radius: 17px;
+    cursor: pointer;
+   }
+   .sty:hover{
+    background-color: aquamarine;
+   }
+   #field{
+    line-height: 50px;
+    font-size: 39px;
+    width: 212px;
+    height: 51px;
+    border-bottom: 1px solid #FF0000;
+    margin-bottom: -20px;
+    overflow: hidden;
+   }
+  </style>
+ </head>
+ <body>
+  <div class="box">
+   <div type="text" id="field" /></div> <br />
+   <input class = "sty" type="button" onclick="num(7)" value="7"/>
+   <input class = "sty" type="button" onclick="num(8)" value="8"/>
+   <input class = "sty" type="button" onclick="num(9)"value="9"/>
+   <input class = "sty" type="button" onclick="num('+')"value="+"/><br />
+   <input class = "sty" type="button" onclick="num(4)"value="4"/>
+   <input class = "sty" type="button" onclick="num(5)"value="5"/>
+   <input class = "sty" type="button" onclick="num(6)"value="6"/>
+   <input class = "sty" type="button" onclick="num('-')"value="-"/><br />
+   <input class = "sty" type="button" onclick="num(1)"value="1"/>
+   <input class = "sty" type="button" onclick="num(2)"value="2"/>
+   <input class = "sty" type="button" onclick="num(3)"value="3"/>
+   <input class = "sty" type="button" onclick="num('*')"value="*"/><br />
+   <input class = "sty" type="button" onclick="num('/')"value="/"/>
+   <input class = "sty" type="button" onclick="num(0)"value="0"/>
+   <input class = "sty" type="button" onclick="reset_value()" value="C"/>
+   <input class = "sty" type="button" onclick="equal()"value="="/><br />
+   <p>简易计算器</p >
+  </div>
+  <script type="text/javascript">
+   function num(figure){     //js方法传递一个形参用来获取button的值
+    var figure = figure.toString();  /* 将方法获取到的值变为字符串 */
+    console.log(figure);
+    var show = document.getElementById("field");    //获取div框
+    showNum = show.innerHTML + figure;  //将输入的元素依次进行连接    
+    show.innerHTML = showNum ;           //再将输入的元素返回到div框中显示
+   }
+   function equal(){   //定义等于的算法
+    /*  将input框的值进行运算  */
+  document.getElementById("field").innerHTML=
+  eval(document.getElementById("field").innerHTML);
+                                                                  //eval()函数可以直接执行js代码
+   }
+   function reset_value(){ 
+    //定义清除方法：由于之前输入在div框中的都是字符串，所以第二次输入需要清空上一次执行的运算结果
+    var a = "";       //定义一个元素值为空
+    document.getElementById("field").innerHTML = a; 
+    //将空值传给div框，准备下一次的运算
+   }
+  </script>
+ </body>
+</html>
