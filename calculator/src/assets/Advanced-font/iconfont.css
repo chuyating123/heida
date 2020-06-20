@@ -15,10 +15,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-yaqiang:before {
-  content: "\e710";
-}
-
 .icon-tiji:before {
   content: "\e600";
 }

@@ -21,83 +21,668 @@
         <a href="#" class="iconfont icon-tiji tiji"></a>
         <p>体积计算</p>
       </li>
-      <li @click="pressure">
-        <a href="#" class="iconfont icon-yaqiang yaqiang"></a>
-        <p>压强计算</p>
+      <li @click="factorail">
+        <a href="#" class="iconfont icon-jiecheng jiecheng"></a>
+        <p>阶乘计算</p>
       </li>
     </ul>
-    <ul>
-      <li v-if="ismi">幂运算</li>
-      <li v-if="issanjiao">三角函数运算</li>
-      <li v-if="isdanwei">单位换算</li>
-      <li v-if="ismianji">面积计算</li>
-      <li v-if="istiji">体积计算</li>
-      <li v-if="isyaqiang">压强计算</li>
+    <ul class="detail">
+      <li v-if="ismi" class="one">
+        <p>幂运算</p>底数
+        <input type="number" v-model="base_number" />
+        <br />指数
+        <input type="number" v-model="index_number" />
+        <br />
+        <button @click="exponentiation">计算</button>
+        <br />结果
+        <span>{{this.exponentiation_result}}</span>
+      </li>
+      <li v-if="issanjiao" class="two">
+        <p>三角函数运算</p>
+        <select v-model="triangle_symbol">
+          <option value="sin">sin</option>
+          <option value="cos">cos</option>
+          <option value="tan">tan</option>
+          <option value="cot">cot</option>
+        </select>
+        <input type="number" v-model="triangle_number"/>°
+        <br />
+        <button @click="get_triangle">计算</button>
+        <br />结果
+        <span>{{this.triangle_result}}</span>
+      </li>
+      <li v-if="isdanwei" class="three">
+        <p>单位换算</p>
+        <div class="choose">
+          <input type="radio" name="unit" value="length" @click="length_change" />长度
+          <input type="radio" name="unit" value="area" @click="area_change" />面积
+          <input type="radio" name="unit" value="volume" @click="volume_change" checked />体积
+          <input type="radio" name="unit" value="weight" @click="weight_change" />重量
+        </div>
+        <ul class="length-detail">
+          <li v-if="islength">
+            <input type="number" v-model="length_number" />
+            <select v-model="length_left">
+              <option value="mm">mm</option>
+              <option value="cm">cm</option>
+              <option value="dm">dm</option>
+              <option value="m">m</option>
+              <option value="km">km</option>
+            </select>
+            <span>=</span>
+            <span>{{this.length_result}}</span>
+            <select v-model="length_right">
+              <option value="mm">mm</option>
+              <option value="cm">cm</option>
+              <option value="dm">dm</option>
+              <option value="m">m</option>
+              <option value="km">km</option>
+            </select>
+            <br />
+            <button @click="exchange_length">换算</button>
+          </li>
+          <li v-if="isarea">
+            <input type="number" v-model="area_number"/>
+            <select v-model="area_left">
+              <option value="mm²">mm²</option>
+              <option value="cm²">cm²</option>
+              <option value="dm²">dm²</option>
+              <option value="m²">m²</option>
+              <option value="km²">km²</option>
+            </select>
+            <span>=</span>
+           <span>{{this.area_result}}</span>
+            <select v-model="area_right">
+              <option value="mm²">mm²</option>
+              <option value="cm²">cm²</option>
+              <option value="dm²">dm²</option>
+              <option value="m²">m²</option>
+              <option value="km²">km²</option>
+            </select>
+            <br />
+            <button @click="exchange_area">换算</button>
+          </li>
+          <li v-if="isvolume">
+            <input type="number" v-model="volume_number"/>
+            <select v-model="volume_left">
+              <option value="mm³">mm³</option>
+              <option value="cm³">cm³</option>
+              <option value="dm³">dm³</option>
+              <option value="m³">m³</option>
+              <option value="km³">km³</option>
+            </select>
+            <span>=</span>
+            <span>{{this.volume_result}}</span>
+            <select v-model="volume_right">
+              <option value="mm³">mm³</option>
+              <option value="cm³">cm³</option>
+              <option value="dm³">dm³</option>
+              <option value="m³">m³</option>
+              <option value="km³">km³</option>
+            </select>
+            <br />
+            <button @click="exchange_volume">换算</button>
+          </li>
+          <li v-if="isweight">
+            <input type="number" v-model="weight_number"/>
+            <select v-model="weight_left">
+              <option value="mg">mg</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+            </select>
+            <span>=</span>
+            <span>{{this.weight_result}}</span>
+            <select v-model="weight_right">
+              <option value="mg">mg</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+            </select>
+            <br>
+            <button @click="exchange_weight">换算</button>
+          </li>
+        </ul>
+      </li>
+      <li v-if="ismianji" class="four">
+        <p>面积计算</p>
+        <input type="radio" name="unit" value="rectangle" @click="rectangle_change" />长方形
+        <input type="radio" name="unit" value="circle" @click="circle_change" />圆形
+        <ul class="area-detail">
+          <li v-if="isrectangle">
+            长
+            <input type="number" v-model="rectangle_length" />
+            <br />宽
+            <input type="number" v-model="rectangle_width"/>
+            <br />
+            <button @click="rectangle_area">计算</button>
+            <br />结果
+            <span>{{this.rectangle_result}}</span>
+          </li>
+          <li v-if="iscircle">
+            半径
+            <input type="number" v-model="circle_number"/>
+            <br />
+            <button @click="circle_area">计算</button>
+            <br />结果
+            <span>{{this.circle_result}}</span>
+          </li>
+        </ul>
+      </li>
+      <li v-if="istiji" class="five">
+        <p>体积计算</p>
+        <input type="radio" name="unit" value="cuboid" @click="cuboid_change" />长方体
+        <input type="radio" name="unit" value="bool" @click="bool_change" />球体
+        <ul class="volume-detail">
+          <li v-if="iscuboid">
+            长
+            <input type="number" v-model="cuboid_length"/>
+            <br />宽
+            <input type="number" v-model="cuboid_width"/>
+            <br />高
+            <input type="number" v-model="cuboid_tall"/>
+            <br />
+            <button @click="cuboid_area">计算</button>
+            <br />结果
+            <span>{{this.cuboid_result}}</span>
+          </li>
+          <li v-if="isbool">
+            半径
+            <input type="number" v-model="bool_number"/>
+            <br />
+            <button @click="bool_area">计算</button>
+            <br />结果
+            <span>{{this.bool_result}}</span>
+          </li>
+        </ul>
+      </li>
+      <li v-if="isjiecheng" class="six">
+        <p>阶乘计算</p>
+        <input type="number" v-model="factorial_number"/>的阶乘
+        <br />
+        <button @click="get_factorial">计算</button>
+        <br />结果
+        <span>{{this.factorial_result}}</span>
+      </li>
     </ul>
   </div>
 </template>
-
 <script>
+import Vue from 'vue'
+import {Message} from 'element-ui'
 export default {
   data() {
     return {
-        ismi:false,
-        issanjiao:false,
-        isdanwei:false,
-        ismianji:false,
-        istiji:false,
-        isyaqiang:false
-    };
+      ismi: false,
+      issanjiao: false,
+      isdanwei: false,
+      ismianji: false,
+      istiji: false,
+      isjiecheng: false,
+      islength: false,
+      isarea: false,
+      isvolume: false,
+      isweight: false,
+      isrectangle: false,
+      iscircle: false,
+      iscuboid: false,
+      isbool: false,
+      base_number: " ",
+      index_number: " ",
+      exponentiation_result: " ",
+      triangle_symbol:" ",
+      triangle_number:" ",
+      triangle_result:" ",
+      length_left:" ",
+      length_right:" ",
+      length_number:" ",
+      length_result:" ",
+      area_number:" ",
+      area_left:" ",
+      area_right:" ",
+      area_result:" ",
+      volume_left:" ",
+      volume_right:" ",
+      volume_number:" ",
+      volume_result:" ",
+      weight_left:" ",
+      weight_right:" ",
+      weight_result:" ",
+      weight_number:" ",
+      rectangle_length:" ",
+      rectangle_width:" ",
+      rectangle_result:" ",
+      circle_number:" ",
+      circle_result:" ",
+      cuboid_length:" ",
+      cuboid_width:" ",
+      cuboid_tall:" ",
+      cuboid_result:" ",
+      bool_number:" ",
+      bool_result:" ",
+      factorial_number:" ",
+      factorial_result:" "
+      };
   },
-  methods:{
-      cloth_cover(){
-        this.ismi=true,
-        this.issanjiao=false,
-        this.isdanwei=false,
-        this.ismianji=false,
-        this.istiji=false,
-        this.isyaqiang=false
-      },
-       triangle(){
-        this.ismi=false,
-        this.issanjiao=true,
-        this.isdanwei=false,
-        this.ismianji=false,
-        this.istiji=false,
-        this.isyaqiang=false
-      },
-      unit(){
-        this.ismi=false,
-        this.issanjiao=false,
-        this.isdanwei=true,
-        this.ismianji=false,
-        this.istiji=false,
-        this.isyaqiang=false
-      },
-       area(){
-        this.ismi=false,
-        this.issanjiao=false,
-        this.isdanwei=false,
-        this.ismianji=true,
-        this.istiji=false,
-        this.isyaqiang=false
-      },
-      volume(){
-        this.ismi=false,
-        this.issanjiao=false,
-        this.isdanwei=false,
-        this.ismianji=false,
-        this.istiji=true,
-        this.isyaqiang=false
-      },
-      pressure(){
-      this.ismi=false,
-      this.issanjiao=false,
-      this.isdanwei=false,
-      this.ismianji=false,
-      this.istiji=false,
-      this.isyaqiang=true
+  methods: {
+    cloth_cover() {
+      (this.ismi = true),
+        (this.issanjiao = false),
+        (this.isdanwei = false),
+        (this.ismianji = false),
+        (this.istiji = false),
+        (this.isjiecheng = false);
+    },
+    triangle() {
+      (this.ismi = false),
+        (this.issanjiao = true),
+        (this.isdanwei = false),
+        (this.ismianji = false),
+        (this.istiji = false),
+        (this.isjiecheng = false);
+    },
+    unit() {
+      (this.ismi = false),
+        (this.issanjiao = false),
+        (this.isdanwei = true),
+        (this.ismianji = false),
+        (this.istiji = false),
+        (this.isjiecheng = false);
+    },
+    area() {
+      (this.ismi = false),
+        (this.issanjiao = false),
+        (this.isdanwei = false),
+        (this.ismianji = true),
+        (this.istiji = false),
+        (this.isjiecheng = false);
+    },
+    volume() {
+      (this.ismi = false),
+        (this.issanjiao = false),
+        (this.isdanwei = false),
+        (this.ismianji = false),
+        (this.istiji = true),
+        (this.isjiecheng = false);
+    },
+    factorail() {
+      (this.ismi = false),
+        (this.issanjiao = false),
+        (this.isdanwei = false),
+        (this.ismianji = false),
+        (this.istiji = false),
+        (this.isjiecheng = true);
+    },
+    length_change() {
+      (this.islength = true),
+        (this.isarea = false),
+        (this.isvolume = false),
+        (this.isweight = false);
+    },
+    area_change() {
+      (this.isarea = true),
+        (this.islength = false),
+        (this.isvolume = false),
+        (this.isweight = false);
+    },
+    volume_change() {
+      (this.islength = false),
+        (this.isarea = false),
+        (this.isvolume = true),
+        (this.isweight = false);
+    },
+    weight_change() {
+      (this.islength = false),
+        (this.isarea = false),
+        (this.isvolume = false),
+        (this.isweight = true);
+    },
+    rectangle_change() {
+      (this.isrectangle = true), (this.iscircle = false);
+    },
+    circle_change() {
+      (this.isrectangle = false), (this.iscircle = true);
+    },
+    cuboid_change() {
+      (this.iscuboid = true), (this.isbool = false);
+    },
+    bool_change() {
+      (this.iscuboid = false), (this.isbool = true);
+    },
+    exponentiation() {
+      if (this.base_number ==0) {
+         console.log("底数不能为0")
+      } else {
+        this.exponentiation_result = Math.pow(this.base_number, this.index_number);
       }
+    },
+    get_triangle(){
+      if(this.triangle_symbol=="sin"){
+        this.triangle_result=Math.sin(this.triangle_number*Math.PI/180).toFixed(6)
+      }
+      else if(this.triangle_symbol=="cos"){
+        this.triangle_result=Math.cos(this.triangle_number*Math.PI/180).toFixed(6)
+      }
+      else if(this.triangle_symbol=="tan"){
+        this.triangle_result=Math.tan(this.triangle_number*Math.PI/180).toFixed(6)
+      }
+      else{
+        this.triangle_result=1/Math.tan(this.triangle_number*Math.PI/180).toFixed(6)
+      }
+    },
+    exchange_length(){
+      if(this.length_left=="mm"){
+        if(this.length_right=="mm"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="cm"){
+          this.length_result=this.length_number/10
+        }
+        else if(this.length_right=="dm"){
+          this.length_result=this.length_number/100
+        }
+        else if(this.length_right=="m"){
+          this.length_result=this.length_number/1000
+        }
+        else{
+          this.length_result=this.length_number/10000
+        }
+      }
+      if(this.length_left=="cm"){
+        if(this.length_right=="mm"){
+          this.length_result=this.length_number*10
+        }
+        else if(this.length_right=="cm"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="dm"){
+          this.length_result=this.length_number/10
+        }
+        else if(this.length_right=="m"){
+          this.length_result=this.length_number/100
+        }
+        else{
+          this.length_result=this.length_number/1000
+        }
+      }
+      if(this.length_left=="dm"){
+        if(this.length_right=="mm"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="cm"){
+          this.length_result=this.length_number*10
+        }
+        else if(this.length_right=="dm"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="m"){
+          this.length_result=this.length_number/10
+        }
+        else{
+          this.length_result=this.length_number/100
+        }
+      }
+      if(this.length_left=="m"){
+        if(this.length_right=="mm"){
+          this.length_result=this.length_number*1000
+        }
+        else if(this.length_right=="cm"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="dm"){
+          this.length_result=this.length_number*10
+        }
+        else if(this.length_right=="m"){
+          this.length_result=this.length_number
+        }
+        else{
+          this.length_result=this.length_number/10
+        }
+      }
+      if(this.length_left=="km"){
+        if(this.length_right=="mm"){
+          this.length_result=this.length_number*10000
+        }
+        else if(this.length_right=="cm"){
+          this.length_result=this.length_number*1000
+        }
+        else if(this.length_right=="dm"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="m"){
+          this.length_result=this.length_number*10
+        }
+        else{
+          this.length_result=this.length_number
+        }
+      }
+    },
+    exchange_area(){
+       if(this.length_left=="mm²"){
+        if(this.length_right=="mm²"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="cm²"){
+          this.length_result=this.length_number/100
+        }
+        else if(this.length_right=="dm²"){
+          this.length_result=this.length_number/10000
+        }
+        else if(this.length_right=="m²"){
+          this.length_result=this.length_number/1000000
+        }
+        else{
+          this.length_result=this.length_number/100000000
+        }
+      }
+      if(this.length_left=="cm²"){
+        if(this.length_right=="mm²"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="cm²"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="dm²"){
+          this.length_result=this.length_number/100
+        }
+        else if(this.length_right=="m²"){
+          this.length_result=this.length_number/10000
+        }
+        else{
+          this.length_result=this.length_number/1000000
+        }
+      }
+      if(this.length_left=="dm²"){
+        if(this.length_right=="mm²"){
+          this.length_result=this.length_number*10000
+        }
+        else if(this.length_right=="cm²"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="dm²"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="m²"){
+          this.length_result=this.length_number/100
+        }
+        else{
+          this.length_result=this.length_number/10000
+        }
+      }
+      if(this.length_left=="m²"){
+        if(this.length_right=="mm²"){
+          this.length_result=this.length_number*1000000
+        }
+        else if(this.length_right=="cm²"){
+          this.length_result=this.length_number*10000
+        }
+        else if(this.length_right=="dm²"){
+          this.length_result=this.length_number*100
+        }
+        else if(this.length_right=="m²"){
+          this.length_result=this.length_number
+        }
+        else{
+          this.length_result=this.length_number/100
+        }
+      }
+      if(this.length_left=="km²"){
+        if(this.length_right=="mm²"){
+          this.length_result=this.length_number*100000000
+        }
+        else if(this.length_right=="cm²"){
+          this.length_result=this.length_number*1000000
+        }
+        else if(this.length_right=="dm²"){
+          this.length_result=this.length_number*10000
+        }
+        else if(this.length_right=="m²"){
+          this.length_result=this.length_number*100
+        }
+        else{
+          this.length_result=this.length_number
+        }
+      }
+    },
+    exchange_volume(){
+      if(this.length_left=="mm³"){
+        if(this.length_right=="mm³"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="cm³"){
+          this.length_result=this.length_number/1000
+        }
+        else if(this.length_right=="dm³"){
+          this.length_result=this.length_number/1000000
+        }
+        else if(this.length_right=="m³"){
+          this.length_result=this.length_number/1000000000
+        }
+        else{
+          this.length_result=this.length_number/1000000000000
+        }
+      }
+      if(this.length_left=="cm³"){
+        if(this.length_right=="mm³"){
+          this.length_result=this.length_number*1000
+        }
+        else if(this.length_right=="cm³"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="dm³"){
+          this.length_result=this.length_number/1000
+        }
+        else if(this.length_right=="m³"){
+          this.length_result=this.length_number/1000000
+        }
+        else{
+          this.length_result=this.length_number/1000000000
+        }
+      }
+      if(this.length_left=="dm³"){
+        if(this.length_right=="mm³"){
+          this.length_result=this.length_number*1000000
+        }
+        else if(this.length_right=="cm³"){
+          this.length_result=this.length_number*1000
+        }
+        else if(this.length_right=="dm³"){
+          this.length_result=this.length_number
+        }
+        else if(this.length_right=="m³"){
+          this.length_result=this.length_number/1000
+        }
+        else{
+          this.length_result=this.length_number/1000000
+        }
+      }
+      if(this.length_left=="m³"){
+        if(this.length_right=="mm³"){
+          this.length_result=this.length_number*1000000000
+        }
+        else if(this.length_right=="cm³"){
+          this.length_result=this.length_number*1000000
+        }
+        else if(this.length_right=="dm³"){
+          this.length_result=this.length_number*1000
+        }
+        else if(this.length_right=="m³"){
+          this.length_result=this.length_number
+        }
+        else{
+          this.length_result=this.length_number/1000
+        }
+      }
+      if(this.length_left=="km³"){
+        if(this.length_right=="mm³"){
+          this.length_result=this.length_number*1000000000000
+        }
+        else if(this.length_right=="cm³"){
+          this.length_result=this.length_number*1000000000
+        }
+        else if(this.length_right=="dm³"){
+          this.length_result=this.length_number*1000000
+        }
+        else if(this.length_right=="m³"){
+          this.length_result=this.length_number*1000
+        }
+        else{
+          this.length_result=this.length_number
+        }
+      }
+    },
+    exchange_weight(){
+      if(this.weight_left=="mg"){
+        if(this.weight_right=="mg"){
+          this.weight_result=this.weight_number
+        }
+        else if(this.weight_right=="g"){
+          this.weight_result=this.weight_number/1000
+        }
+        else{
+          this.weight_result=this.weight_number/1000000
+        }
+      }
+      if(this.weight_left=="g"){
+        if(this.weight_right=="mg"){
+          this.weight_result=this.weight_number*1000
+        }
+        else if(this.weight_right=="g"){
+          this.weight_result=this.weight_number
+        }
+        else{
+          this.weight_result=this.weight_number/1000
+        }
+      }
+      if(this.weight_left=="kg"){
+        if(this.weight_right=="mg"){
+          this.weight_result=this.weight_number*1000000
+        }
+        else if(this.weight_right=="g"){
+          this.weight_result=this.weight_number*1000
+        }
+        else{
+          this.weight_result=this.weight_number
+        }
+      }
+    },
+    rectangle_area(){
+      this.rectangle_result=this.rectangle_length*this.rectangle_width
+    },
+    circle_area(){
+      this.circle_result=(Math.PI*this.circle_number*this.circle_number).toFixed(6)
+    },
+    cuboid_area(){
+      this.cuboid_result=this.cuboid_length*this.cuboid_width*this.cuboid_tall
+    },
+    bool_area(){
+      this.bool_result=(4/3*Math.PI*this.bool_number*this.bool_number*this.bool_number).toFixed(6)
+    },
+    get_factorial(){
+      var j=1;
+      for(var i=1;i<=this.factorial_number;i++){
+        j*=i;
+      }
+      this.factorial_result=j;
+    }
   }
 };
 </script>
@@ -147,7 +732,58 @@ export default {
 .tiji {
   background: #00ffff;
 }
-.yaqiang {
+.jiecheng {
   background: #0f4567;
+}
+.detail {
+  text-align: center;
+  margin-top: 0.6rem;
+  font-size: 0.3rem;
+}
+.detail p {
+  font-size: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.detail input {
+  margin-bottom: 0.2rem;
+  width: 1.2rem;
+}
+.detail button {
+  width: 1.4rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.one p {
+  color: #00ff0f;
+}
+.two p {
+  color: #fd9d21;
+}
+.three p {
+  color: #ff6767;
+}
+.four p {
+  color: #ff89f7;
+}
+.five p {
+  color: #00ffff;
+}
+.six p {
+  color: #0f4567;
+}
+.choose {
+  font-size: 0.3rem;
+  input {
+    width: 0.6rem;
+  }
+}
+.length-detail {
+  margin-top: 0.4rem;
+}
+.area-detail {
+  margin-top: 0.4rem;
+}
+.volume-detail {
+  margin-top: 0.4rem;
 }
 </style>
