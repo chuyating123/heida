@@ -35,9 +35,7 @@ export default {
       result: "0",
       isDecimalAdd: false, //小数点,用来防止数字中间放超过一个小数点
       isOperatorAdd: false, //是否点击运算符，用来防止输入超过一个运算符
-      isNumber: false ,//判断是否开始输入数字
-      record:[],
-      time:[],
+      isNumber: false //判断是否开始输入数字
     };
   },
   methods: {
@@ -64,71 +62,95 @@ export default {
         }
         if (character === ".") {
           this.isDecimalAdd = true;
-          this.isOperatorAdd=true
-        }else{
-          this.isOperatorAdd=false
+          this.isOperatorAdd = true;
+        } else {
+          this.isOperatorAdd = false;
         }
         this.result += "" + character; //印好的作业是变成字符串
       }
-      if(this.isOperator(character)&&!this.isOperatorAdd){
-        this.result+=''+character
-        this.isDecimalAdd=false
-        this.isOperatorAdd=true
+      if (this.isOperator(character) && !this.isOperatorAdd) {
+        this.result += "" + character;
+        this.isDecimalAdd = false;
+        this.isOperatorAdd = true;
       }
     },
     //点击等于符号时
     Equals() {
-      var d=new Date()
-      let calculate=this.result.replace(new RegExp('×','g'),'*').replace(new RegExp('÷','g'),'/')
-      this.result=parseFloat(eval(calculate).toFixed(9)).toString()
-      this.isDecimalAdd=false
-      this.isOperatorAdd=false
-      this.record.push(this.result)
-      this.time.push(d)
+      let calculate = this.result
+        .replace(new RegExp("×", "g"), "*")
+        .replace(new RegExp("÷", "g"), "/");
+      this.result = parseFloat(eval(calculate).toFixed(9)).toString();
+      this.isDecimalAdd = false;
+      this.isOperatorAdd = false;
+      var date=new Date()
+      var hour = date.getHours();
+      var min=date.getMinutes();
+      var sec=date.getSeconds();
+      var time=hour+":"+min+":"+sec
+      console.log(time)
+      var comment = this.result;
+      console.log(comment)
+      this.$http
+        .post(
+          'http://localhost:3000/api/Stu/addStu',
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        }).catch((e)=>{
+          console.log("失败")
+        });
     },
     //点击正负号时
     Toggle() {
-      if(this.isOperatorAdd||!this.isNumber){
-        return
+      if (this.isOperatorAdd || !this.isNumber) {
+        return;
       }
-      this.result=this.result+'*-1'
-      this.Equals()
+      this.result = this.result + "*-1";
+      this.Equals();
     },
     //点击百分比时
     Percentage() {
-       if(this.isOperatorAdd||!this.isNumber){
-        return
+      if (this.isOperatorAdd || !this.isNumber) {
+        return;
       }
-      this.result=this.result+'*0.01'
-      this.Equals()
+      this.result = this.result + "*0.01";
+      this.Equals();
     },
-    reciprocal(){
-       if(this.isOperatorAdd||!this.isNumber){
-        return
+    reciprocal() {
+      if (this.isOperatorAdd || !this.isNumber) {
+        return;
       }
-      this.result=1/this.result+''
+      this.result = 1 / this.result + "";
+      this.Equals();
     },
-    extraction(){
-      if(this.isOperatorAdd||!this.isNumber){
-        return
+    extraction() {
+      if (this.isOperatorAdd || !this.isNumber) {
+        return;
       }
-       this.result=Math.sqrt(this.result)+''
+      this.result = Math.sqrt(this.result) + "";
+      this.Equals();
     },
-    square(){
-    if(this.isOperatorAdd||!this.isNumber){
-        return
+    square() {
+      if (this.isOperatorAdd || !this.isNumber) {
+        return;
       }
-      this.result=this.result*this.result+''
+      this.result = this.result * this.result + "";
+      this.Equals();
     },
     clear() {
       (this.result = "0"),
-      (this.isDecimalAdd = false),
-      (this.isOperatorAdd = false),
-      (this.isNumber = false);
+        (this.isDecimalAdd = false),
+        (this.isOperatorAdd = false),
+        (this.isNumber = false);
     },
-    back(){
-      this.result=this.result.substring(0,this.result.length-1)
-    },
+    back() {
+      this.result = this.result.substring(0, this.result.length - 1);
+    }
   }
 };
 </script>
@@ -159,7 +181,7 @@ export default {
 .result {
   text-align: right;
   line-height: var(--button-height);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding: 0 0.4rem;
 }
 </style>

@@ -45,7 +45,7 @@
           <option value="tan">tan</option>
           <option value="cot">cot</option>
         </select>
-        <input type="number" v-model="triangle_number"/>°
+        <input type="number" v-model="triangle_number" />°
         <br />
         <button @click="get_triangle">计算</button>
         <br />结果
@@ -82,7 +82,7 @@
             <button @click="exchange_length">换算</button>
           </li>
           <li v-if="isarea">
-            <input type="number" v-model="area_number"/>
+            <input type="number" v-model="area_number" />
             <select v-model="area_left">
               <option value="mm²">mm²</option>
               <option value="cm²">cm²</option>
@@ -91,7 +91,7 @@
               <option value="km²">km²</option>
             </select>
             <span>=</span>
-           <span>{{this.area_result}}</span>
+            <span>{{this.area_result}}</span>
             <select v-model="area_right">
               <option value="mm²">mm²</option>
               <option value="cm²">cm²</option>
@@ -103,7 +103,7 @@
             <button @click="exchange_area">换算</button>
           </li>
           <li v-if="isvolume">
-            <input type="number" v-model="volume_number"/>
+            <input type="number" v-model="volume_number" />
             <select v-model="volume_left">
               <option value="mm³">mm³</option>
               <option value="cm³">cm³</option>
@@ -124,7 +124,7 @@
             <button @click="exchange_volume">换算</button>
           </li>
           <li v-if="isweight">
-            <input type="number" v-model="weight_number"/>
+            <input type="number" v-model="weight_number" />
             <select v-model="weight_left">
               <option value="mg">mg</option>
               <option value="g">g</option>
@@ -137,21 +137,22 @@
               <option value="g">g</option>
               <option value="kg">kg</option>
             </select>
-            <br>
+            <br />
             <button @click="exchange_weight">换算</button>
           </li>
         </ul>
       </li>
       <li v-if="ismianji" class="four">
         <p>面积计算</p>
-        <input type="radio" name="unit" value="rectangle" @click="rectangle_change" />长方形
-        <input type="radio" name="unit" value="circle" @click="circle_change" />圆形
+        <input type="radio" name="area" value="rectangle" @click="rectangle_change" />长方形
+        <input type="radio" name="area" value="circle" @click="circle_change" />圆形
+        <input type="radio" name="area" value="trapezoid" @click="trapezoid_change" />梯形
         <ul class="area-detail">
           <li v-if="isrectangle">
             长
             <input type="number" v-model="rectangle_length" />
             <br />宽
-            <input type="number" v-model="rectangle_width"/>
+            <input type="number" v-model="rectangle_width" />
             <br />
             <button @click="rectangle_area">计算</button>
             <br />结果
@@ -159,11 +160,23 @@
           </li>
           <li v-if="iscircle">
             半径
-            <input type="number" v-model="circle_number"/>
+            <input type="number" v-model="circle_number" />
             <br />
             <button @click="circle_area">计算</button>
             <br />结果
             <span>{{this.circle_result}}</span>
+          </li>
+          <li v-if="istrapezoid">
+            上底
+            <input type="number" v-model="trapezoid_top" />
+            下底
+            <input type="number" v-model="trapezoid_bottom" />
+            高
+            <input type="number" v-model="trapezoid_tall" />
+            <br />
+            <button @click="trapezoid_area">计算</button>
+            <br />结果
+            <span>{{this.trapezoid_result}}</span>
           </li>
         </ul>
       </li>
@@ -174,11 +187,11 @@
         <ul class="volume-detail">
           <li v-if="iscuboid">
             长
-            <input type="number" v-model="cuboid_length"/>
+            <input type="number" v-model="cuboid_length" />
             <br />宽
-            <input type="number" v-model="cuboid_width"/>
+            <input type="number" v-model="cuboid_width" />
             <br />高
-            <input type="number" v-model="cuboid_tall"/>
+            <input type="number" v-model="cuboid_tall" />
             <br />
             <button @click="cuboid_area">计算</button>
             <br />结果
@@ -186,7 +199,7 @@
           </li>
           <li v-if="isbool">
             半径
-            <input type="number" v-model="bool_number"/>
+            <input type="number" v-model="bool_number" />
             <br />
             <button @click="bool_area">计算</button>
             <br />结果
@@ -196,7 +209,7 @@
       </li>
       <li v-if="isjiecheng" class="six">
         <p>阶乘计算</p>
-        <input type="number" v-model="factorial_number"/>的阶乘
+        <input type="number" v-model="factorial_number" />的阶乘
         <br />
         <button @click="get_factorial">计算</button>
         <br />结果
@@ -206,8 +219,8 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import {Message} from 'element-ui'
+import Vue from "vue";
+import { Message } from "element-ui";
 export default {
   data() {
     return {
@@ -223,44 +236,50 @@ export default {
       isweight: false,
       isrectangle: false,
       iscircle: false,
+      istrapezoid:false,
       iscuboid: false,
       isbool: false,
       base_number: " ",
       index_number: " ",
       exponentiation_result: " ",
-      triangle_symbol:" ",
-      triangle_number:" ",
-      triangle_result:" ",
-      length_left:" ",
-      length_right:" ",
-      length_number:" ",
-      length_result:" ",
-      area_number:" ",
-      area_left:" ",
-      area_right:" ",
-      area_result:" ",
-      volume_left:" ",
-      volume_right:" ",
-      volume_number:" ",
-      volume_result:" ",
-      weight_left:" ",
-      weight_right:" ",
-      weight_result:" ",
-      weight_number:" ",
-      rectangle_length:" ",
-      rectangle_width:" ",
-      rectangle_result:" ",
-      circle_number:" ",
-      circle_result:" ",
-      cuboid_length:" ",
-      cuboid_width:" ",
-      cuboid_tall:" ",
-      cuboid_result:" ",
-      bool_number:" ",
-      bool_result:" ",
-      factorial_number:" ",
-      factorial_result:" "
-      };
+      triangle_symbol: " ",
+      triangle_number: " ",
+      triangle_result: " ",
+      length_left: " ",
+      length_right: " ",
+      length_number: " ",
+      length_result: " ",
+      area_number: " ",
+      area_left: " ",
+      area_right: " ",
+      area_result: " ",
+      volume_left: " ",
+      volume_right: " ",
+      volume_number: " ",
+      volume_result: " ",
+      weight_left: " ",
+      weight_right: " ",
+      weight_result: " ",
+      weight_number: " ",
+      rectangle_length: " ",
+      rectangle_width: " ",
+      rectangle_result: " ",
+      circle_number: " ",
+      circle_result: " ",
+      trapezoid_top:" ",
+      trapezoid_bottom:" ",
+      trapezoid_tall:" ",
+      trapezoid_number:" ",
+      trapezoid_result:" ",
+      cuboid_length: " ",
+      cuboid_width: " ",
+      cuboid_tall: " ",
+      cuboid_result: " ",
+      bool_number: " ",
+      bool_result: " ",
+      factorial_number: " ",
+      factorial_result: " "
+    };
   },
   methods: {
     cloth_cover() {
@@ -336,10 +355,13 @@ export default {
         (this.isweight = true);
     },
     rectangle_change() {
-      (this.isrectangle = true), (this.iscircle = false);
+      (this.isrectangle = true), (this.iscircle = false),this.istrapezoid=false;
     },
     circle_change() {
-      (this.isrectangle = false), (this.iscircle = true);
+      (this.isrectangle = false), (this.iscircle = true),this.istrapezoid=false;
+    },
+    trapezoid_change(){
+      (this.isrectangle = false), (this.iscircle = false),this.istrapezoid=true;
     },
     cuboid_change() {
       (this.iscuboid = true), (this.isbool = false);
@@ -348,340 +370,571 @@ export default {
       (this.iscuboid = false), (this.isbool = true);
     },
     exponentiation() {
-      if (this.base_number ==0) {
-         console.log("底数不能为0")
+      if (this.base_number == 0) {
+        console.log("底数不能为0");
       } else {
-        this.exponentiation_result = Math.pow(this.base_number, this.index_number);
+        this.exponentiation_result = Math.pow(
+          this.base_number,
+          this.index_number
+        );
       }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.exponentiation_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    get_triangle(){
-      if(this.triangle_symbol=="sin"){
-        this.triangle_result=Math.sin(this.triangle_number*Math.PI/180).toFixed(6)
+    get_triangle() {
+      if (this.triangle_symbol == "sin") {
+        this.triangle_result = Math.sin(
+          (this.triangle_number * Math.PI) / 180
+        ).toFixed(6);
+      } else if (this.triangle_symbol == "cos") {
+        this.triangle_result = Math.cos(
+          (this.triangle_number * Math.PI) / 180
+        ).toFixed(6);
+      } else if (this.triangle_symbol == "tan") {
+        this.triangle_result = Math.tan(
+          (this.triangle_number * Math.PI) / 180
+        ).toFixed(6);
+      } else {
+        this.triangle_result =
+          1 / Math.tan((this.triangle_number * Math.PI) / 180).toFixed(6);
       }
-      else if(this.triangle_symbol=="cos"){
-        this.triangle_result=Math.cos(this.triangle_number*Math.PI/180).toFixed(6)
-      }
-      else if(this.triangle_symbol=="tan"){
-        this.triangle_result=Math.tan(this.triangle_number*Math.PI/180).toFixed(6)
-      }
-      else{
-        this.triangle_result=1/Math.tan(this.triangle_number*Math.PI/180).toFixed(6)
-      }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.triangle_number;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    exchange_length(){
-      if(this.length_left=="mm"){
-        if(this.length_right=="mm"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="cm"){
-          this.length_result=this.length_number/10
-        }
-        else if(this.length_right=="dm"){
-          this.length_result=this.length_number/100
-        }
-        else if(this.length_right=="m"){
-          this.length_result=this.length_number/1000
-        }
-        else{
-          this.length_result=this.length_number/10000
+    exchange_length() {
+      if (this.length_left == "mm") {
+        if (this.length_right == "mm") {
+          this.length_result = this.length_number;
+        } else if (this.length_right == "cm") {
+          this.length_result = this.length_number / 10;
+        } else if (this.length_right == "dm") {
+          this.length_result = this.length_number / 100;
+        } else if (this.length_right == "m") {
+          this.length_result = this.length_number / 1000;
+        } else {
+          this.length_result = this.length_number / 10000;
         }
       }
-      if(this.length_left=="cm"){
-        if(this.length_right=="mm"){
-          this.length_result=this.length_number*10
-        }
-        else if(this.length_right=="cm"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="dm"){
-          this.length_result=this.length_number/10
-        }
-        else if(this.length_right=="m"){
-          this.length_result=this.length_number/100
-        }
-        else{
-          this.length_result=this.length_number/1000
+      if (this.length_left == "cm") {
+        if (this.length_right == "mm") {
+          this.length_result = this.length_number * 10;
+        } else if (this.length_right == "cm") {
+          this.length_result = this.length_number;
+        } else if (this.length_right == "dm") {
+          this.length_result = this.length_number / 10;
+        } else if (this.length_right == "m") {
+          this.length_result = this.length_number / 100;
+        } else {
+          this.length_result = this.length_number / 1000;
         }
       }
-      if(this.length_left=="dm"){
-        if(this.length_right=="mm"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="cm"){
-          this.length_result=this.length_number*10
-        }
-        else if(this.length_right=="dm"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="m"){
-          this.length_result=this.length_number/10
-        }
-        else{
-          this.length_result=this.length_number/100
+      if (this.length_left == "dm") {
+        if (this.length_right == "mm") {
+          this.length_result = this.length_number * 100;
+        } else if (this.length_right == "cm") {
+          this.length_result = this.length_number * 10;
+        } else if (this.length_right == "dm") {
+          this.length_result = this.length_number;
+        } else if (this.length_right == "m") {
+          this.length_result = this.length_number / 10;
+        } else {
+          this.length_result = this.length_number / 100;
         }
       }
-      if(this.length_left=="m"){
-        if(this.length_right=="mm"){
-          this.length_result=this.length_number*1000
-        }
-        else if(this.length_right=="cm"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="dm"){
-          this.length_result=this.length_number*10
-        }
-        else if(this.length_right=="m"){
-          this.length_result=this.length_number
-        }
-        else{
-          this.length_result=this.length_number/10
+      if (this.length_left == "m") {
+        if (this.length_right == "mm") {
+          this.length_result = this.length_number * 1000;
+        } else if (this.length_right == "cm") {
+          this.length_result = this.length_number * 100;
+        } else if (this.length_right == "dm") {
+          this.length_result = this.length_number * 10;
+        } else if (this.length_right == "m") {
+          this.length_result = this.length_number;
+        } else {
+          this.length_result = this.length_number / 10;
         }
       }
-      if(this.length_left=="km"){
-        if(this.length_right=="mm"){
-          this.length_result=this.length_number*10000
-        }
-        else if(this.length_right=="cm"){
-          this.length_result=this.length_number*1000
-        }
-        else if(this.length_right=="dm"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="m"){
-          this.length_result=this.length_number*10
-        }
-        else{
-          this.length_result=this.length_number
+      if (this.length_left == "km") {
+        if (this.length_right == "mm") {
+          this.length_result = this.length_number * 10000;
+        } else if (this.length_right == "cm") {
+          this.length_result = this.length_number * 1000;
+        } else if (this.length_right == "dm") {
+          this.length_result = this.length_number * 100;
+        } else if (this.length_right == "m") {
+          this.length_result = this.length_number * 10;
+        } else {
+          this.length_result = this.length_number;
         }
       }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.length_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    exchange_area(){
-       if(this.length_left=="mm²"){
-        if(this.length_right=="mm²"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="cm²"){
-          this.length_result=this.length_number/100
-        }
-        else if(this.length_right=="dm²"){
-          this.length_result=this.length_number/10000
-        }
-        else if(this.length_right=="m²"){
-          this.length_result=this.length_number/1000000
-        }
-        else{
-          this.length_result=this.length_number/100000000
+    exchange_area() {
+      if (this.area_left == "mm²") {
+        if (this.area_right == "mm²") {
+          this.area_result = this.area_number;
+        } else if (this.area_right == "cm²") {
+          this.area_result = this.area_number / 100;
+        } else if (this.area_right == "dm²") {
+          this.area_result = this.area_number / 10000;
+        } else if (this.area_right == "m²") {
+          this.area_result = this.area_number / 1000000;
+        } else {
+          this.area_result = this.area_number / 100000000;
         }
       }
-      if(this.length_left=="cm²"){
-        if(this.length_right=="mm²"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="cm²"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="dm²"){
-          this.length_result=this.length_number/100
-        }
-        else if(this.length_right=="m²"){
-          this.length_result=this.length_number/10000
-        }
-        else{
-          this.length_result=this.length_number/1000000
+      if (this.area_left == "cm²") {
+        if (this.area_right == "mm²") {
+          this.area_result = this.area_number * 100;
+        } else if (this.area_right == "cm²") {
+          this.area_result = this.area_number;
+        } else if (this.area_right == "dm²") {
+          this.area_result = this.area_number / 100;
+        } else if (this.length_right == "m²") {
+          this.area_result = this.area_number / 10000;
+        } else {
+          this.area_result = this.area_number / 1000000;
         }
       }
-      if(this.length_left=="dm²"){
-        if(this.length_right=="mm²"){
-          this.length_result=this.length_number*10000
-        }
-        else if(this.length_right=="cm²"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="dm²"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="m²"){
-          this.length_result=this.length_number/100
-        }
-        else{
-          this.length_result=this.length_number/10000
+      if (this.area_left == "dm²") {
+        if (this.area_right == "mm²") {
+          this.area_result = this.area_number * 10000;
+        } else if (this.area_right == "cm²") {
+          this.area_result = this.area_number * 100;
+        } else if (this.area_right == "dm²") {
+          this.area_result = this.area_number;
+        } else if (this.area_right == "m²") {
+          this.area_result = this.area_number / 100;
+        } else {
+          this.area_result = this.area_number / 10000;
         }
       }
-      if(this.length_left=="m²"){
-        if(this.length_right=="mm²"){
-          this.length_result=this.length_number*1000000
-        }
-        else if(this.length_right=="cm²"){
-          this.length_result=this.length_number*10000
-        }
-        else if(this.length_right=="dm²"){
-          this.length_result=this.length_number*100
-        }
-        else if(this.length_right=="m²"){
-          this.length_result=this.length_number
-        }
-        else{
-          this.length_result=this.length_number/100
+      if (this.area_left == "m²") {
+        if (this.area_right == "mm²") {
+          this.area_result = this.area_number * 1000000;
+        } else if (this.area_right == "cm²") {
+          this.area_result = this.area_number * 10000;
+        } else if (this.area_right == "dm²") {
+          this.area_result = this.area_number * 100;
+        } else if (this.area_right == "m²") {
+          this.area_result = this.area_number;
+        } else {
+          this.area_result = this.area_number / 100;
         }
       }
-      if(this.length_left=="km²"){
-        if(this.length_right=="mm²"){
-          this.length_result=this.length_number*100000000
-        }
-        else if(this.length_right=="cm²"){
-          this.length_result=this.length_number*1000000
-        }
-        else if(this.length_right=="dm²"){
-          this.length_result=this.length_number*10000
-        }
-        else if(this.length_right=="m²"){
-          this.length_result=this.length_number*100
-        }
-        else{
-          this.length_result=this.length_number
+      if (this.area_left == "km²") {
+        if (this.area_right == "mm²") {
+          this.area_result = this.area_number * 100000000;
+        } else if (this.area_right == "cm²") {
+          this.area_result = this.area_number * 1000000;
+        } else if (this.area_right == "dm²") {
+          this.area_result = this.area_number * 10000;
+        } else if (this.area_right == "m²") {
+          this.area_result = this.area_number * 100;
+        } else {
+          this.area_result = this.area_number;
         }
       }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.area_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    exchange_volume(){
-      if(this.length_left=="mm³"){
-        if(this.length_right=="mm³"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="cm³"){
-          this.length_result=this.length_number/1000
-        }
-        else if(this.length_right=="dm³"){
-          this.length_result=this.length_number/1000000
-        }
-        else if(this.length_right=="m³"){
-          this.length_result=this.length_number/1000000000
-        }
-        else{
-          this.length_result=this.length_number/1000000000000
+    exchange_volume() {
+      if (this.volume_left == "mm³") {
+        if (this.volume_right == "mm³") {
+          this.volume_result = this.volume_number;
+        } else if (this.volume_right == "cm³") {
+          this.volume_result = this.volume_number / 1000;
+        } else if (this.volume_right == "dm³") {
+          this.volume_result = this.volume_number / 1000000;
+        } else if (this.volume_right == "m³") {
+          this.volume_result = this.volume_number / 1000000000;
+        } else {
+          this.volume_result = this.volume_number / 1000000000000;
         }
       }
-      if(this.length_left=="cm³"){
-        if(this.length_right=="mm³"){
-          this.length_result=this.length_number*1000
-        }
-        else if(this.length_right=="cm³"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="dm³"){
-          this.length_result=this.length_number/1000
-        }
-        else if(this.length_right=="m³"){
-          this.length_result=this.length_number/1000000
-        }
-        else{
-          this.length_result=this.length_number/1000000000
+      if (this.volume_left == "cm³") {
+        if (this.volume_right == "mm³") {
+          this.volume_result = this.volume_number * 1000;
+        } else if (this.volume_right == "cm³") {
+          this.volume_result = this.volume_number;
+        } else if (this.volume_right == "dm³") {
+          this.volume_result = this.volume_number / 1000;
+        } else if (this.length_right == "m³") {
+          this.volume_result = this.volume_number / 1000000;
+        } else {
+          this.volume_result = this.volume_number / 1000000000;
         }
       }
-      if(this.length_left=="dm³"){
-        if(this.length_right=="mm³"){
-          this.length_result=this.length_number*1000000
-        }
-        else if(this.length_right=="cm³"){
-          this.length_result=this.length_number*1000
-        }
-        else if(this.length_right=="dm³"){
-          this.length_result=this.length_number
-        }
-        else if(this.length_right=="m³"){
-          this.length_result=this.length_number/1000
-        }
-        else{
-          this.length_result=this.length_number/1000000
+      if (this.volume_left == "dm³") {
+        if (this.volume_right == "mm³") {
+          this.volume_result = this.volume_number * 1000000;
+        } else if (this.volume_right == "cm³") {
+          this.volume_result = this.volume_number * 1000;
+        } else if (this.length_right == "dm³") {
+          this.volume_result = this.volume_number;
+        } else if (this.length_right == "m³") {
+          this.volume_result = this.volume_number / 1000;
+        } else {
+          this.volume_result = this.volume_number / 1000000;
         }
       }
-      if(this.length_left=="m³"){
-        if(this.length_right=="mm³"){
-          this.length_result=this.length_number*1000000000
-        }
-        else if(this.length_right=="cm³"){
-          this.length_result=this.length_number*1000000
-        }
-        else if(this.length_right=="dm³"){
-          this.length_result=this.length_number*1000
-        }
-        else if(this.length_right=="m³"){
-          this.length_result=this.length_number
-        }
-        else{
-          this.length_result=this.length_number/1000
+      if (this.volume_left == "m³") {
+        if (this.volume_right == "mm³") {
+          this.volume_result = this.volume_number * 1000000000;
+        } else if (this.length_right == "cm³") {
+          this.volume_result = this.volume_number * 1000000;
+        } else if (this.length_right == "dm³") {
+          this.volume_result = this.volume_number * 1000;
+        } else if (this.length_right == "m³") {
+          this.volume_result = this.volume_number;
+        } else {
+          this.volume_result = this.volume_number / 1000;
         }
       }
-      if(this.length_left=="km³"){
-        if(this.length_right=="mm³"){
-          this.length_result=this.length_number*1000000000000
-        }
-        else if(this.length_right=="cm³"){
-          this.length_result=this.length_number*1000000000
-        }
-        else if(this.length_right=="dm³"){
-          this.length_result=this.length_number*1000000
-        }
-        else if(this.length_right=="m³"){
-          this.length_result=this.length_number*1000
-        }
-        else{
-          this.length_result=this.length_number
+      if (this.volume_left == "km³") {
+        if (this.volume_right == "mm³") {
+          this.volume_result = this.volume_number * 1000000000000;
+        } else if (this.volume_right == "cm³") {
+          this.volume_result = this.volume_number * 1000000000;
+        } else if (this.volume_right == "dm³") {
+          this.volume_result = this.volume_number * 1000000;
+        } else if (this.volume_right == "m³") {
+          this.volume_result = this.volume_number * 1000;
+        } else {
+          this.volume_result = this.volume_number;
         }
       }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.volume_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    exchange_weight(){
-      if(this.weight_left=="mg"){
-        if(this.weight_right=="mg"){
-          this.weight_result=this.weight_number
-        }
-        else if(this.weight_right=="g"){
-          this.weight_result=this.weight_number/1000
-        }
-        else{
-          this.weight_result=this.weight_number/1000000
+    exchange_weight() {
+      if (this.weight_left == "mg") {
+        if (this.weight_right == "mg") {
+          this.weight_result = this.weight_number;
+        } else if (this.weight_right == "g") {
+          this.weight_result = this.weight_number / 1000;
+        } else {
+          this.weight_result = this.weight_number / 1000000;
         }
       }
-      if(this.weight_left=="g"){
-        if(this.weight_right=="mg"){
-          this.weight_result=this.weight_number*1000
-        }
-        else if(this.weight_right=="g"){
-          this.weight_result=this.weight_number
-        }
-        else{
-          this.weight_result=this.weight_number/1000
+      if (this.weight_left == "g") {
+        if (this.weight_right == "mg") {
+          this.weight_result = this.weight_number * 1000;
+        } else if (this.weight_right == "g") {
+          this.weight_result = this.weight_number;
+        } else {
+          this.weight_result = this.weight_number / 1000;
         }
       }
-      if(this.weight_left=="kg"){
-        if(this.weight_right=="mg"){
-          this.weight_result=this.weight_number*1000000
-        }
-        else if(this.weight_right=="g"){
-          this.weight_result=this.weight_number*1000
-        }
-        else{
-          this.weight_result=this.weight_number
+      if (this.weight_left == "kg") {
+        if (this.weight_right == "mg") {
+          this.weight_result = this.weight_number * 1000000;
+        } else if (this.weight_right == "g") {
+          this.weight_result = this.weight_number * 1000;
+        } else {
+          this.weight_result = this.weight_number;
         }
       }
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.weight_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    rectangle_area(){
-      this.rectangle_result=this.rectangle_length*this.rectangle_width
+    rectangle_area() {
+      this.rectangle_result = this.rectangle_length * this.rectangle_width;
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.rectangle_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    circle_area(){
-      this.circle_result=(Math.PI*this.circle_number*this.circle_number).toFixed(6)
+    circle_area() {
+      this.circle_result = (
+        Math.PI *
+        this.circle_number *
+        this.circle_number
+      ).toFixed(6);
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.circle_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    cuboid_area(){
-      this.cuboid_result=this.cuboid_length*this.cuboid_width*this.cuboid_tall
+    trapezoid_area(){
+    this.trapezoid_result=(1/2)*(parseInt(this.trapezoid_top)+parseInt(this.trapezoid_bottom))*this.trapezoid_tall
+    var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.trapezoid_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    bool_area(){
-      this.bool_result=(4/3*Math.PI*this.bool_number*this.bool_number*this.bool_number).toFixed(6)
+    cuboid_area() {
+      this.cuboid_result =
+        this.cuboid_length * this.cuboid_width * this.cuboid_tall;
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.cuboid_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     },
-    get_factorial(){
-      var j=1;
-      for(var i=1;i<=this.factorial_number;i++){
-        j*=i;
+    bool_area() {
+      this.bool_result = (
+        (4 / 3) *
+        Math.PI *
+        this.bool_number *
+        this.bool_number *
+        this.bool_number
+      ).toFixed(6);
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.bool_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
+    },
+    get_factorial() {
+      var j = 1;
+      for (var i = 1; i <= this.factorial_number; i++) {
+        j *= i;
       }
-      this.factorial_result=j;
+      this.factorial_result = j;
+      var date = new Date();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var time = hour + ":" + min + ":" + sec;
+      console.log(time);
+      var comment = this.factorial_result;
+      console.log(comment);
+      this.$http
+        .post(
+          "http://localhost:3000/api/Stu/addStu1",
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log("失败");
+        });
     }
   }
 };

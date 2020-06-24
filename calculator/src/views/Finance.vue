@@ -33,7 +33,7 @@
         <br>
         贷款周期<input type="number" v-model="loans_time">
         <br>
-        利率<input type="number" v-model="loans_rate">
+        利率<input type="number" v-model="loans_rate">%
         <br>
         <button @click="get_loans">计算</button>
         <br>
@@ -47,8 +47,8 @@
               <option value="美元">美元</option>
               <option value="人民币">人民币</option>
               <option value="日元">日元</option>
-              <option value="日元">韩元</option>
-              <option value="日元">英镑</option>
+              <option value="韩元">韩元</option>
+              <option value="英镑">英镑</option>
             </select>
             <span>=</span>
             <span>{{this.cyrrency_result}}</span>
@@ -56,8 +56,8 @@
               <option value="美元">美元</option>
               <option value="人民币">人民币</option>
               <option value="日元">日元</option>
-              <option value="日元">韩元</option>
-              <option value="日元">英镑</option>
+              <option value="韩元">韩元</option>
+              <option value="英镑">英镑</option>
             </select>
             <br>
             <button @click="get_cyrrency">换算</button>
@@ -106,9 +106,53 @@ export default {
     },
     get_deposit(){
       this.deposit_result=(this.deposit_principal*this.deposit_time*this.deposit_rate*0.01).toFixed(9)
+       var date=new Date()
+      var hour = date.getHours();
+      var min=date.getMinutes();
+      var sec=date.getSeconds();
+      var time=hour+":"+min+":"+sec
+      console.log(time)
+      var comment = this.deposit_result;
+      console.log(comment)
+      this.$http
+        .post(
+          'http://localhost:3000/api/Stu/addStu2',
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        }).catch((e)=>{
+          console.log("失败")
+        });
     },
     get_loans(){
       this.loans_result=(this.loans_principal*this.loans_time*this.loans_rate*0.01).toFixed(9)
+        var date=new Date()
+      var hour = date.getHours();
+      var min=date.getMinutes();
+      var sec=date.getSeconds();
+      var time=hour+":"+min+":"+sec
+      console.log(time)
+      var comment = this.loans_result;
+      console.log(comment)
+      this.$http
+        .post(
+          'http://localhost:3000/api/Stu/addStu2',
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        }).catch((e)=>{
+          console.log("失败")
+        });
     },
     get_cyrrency(){
       if(this.cyrrency_left=="美元"){
@@ -147,55 +191,77 @@ export default {
       }
       if(this.cyrrency_left=="日元"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*0.06585
+          this.cyrrency_result=this.cyrrency_number*0.06616
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.009300
+          this.cyrrency_result=this.cyrrency_number*0.009357
         }
         else if(this.cyrrency_right=="日元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else if(this.cyrrency_right=="韩元"){
-          this.cyrrency_result=this.cyrrency_number*11.2527
+          this.cyrrency_result=this.cyrrency_number*11.3393
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.007372
+          this.cyrrency_result=this.cyrrency_number*0.007573
         }
     }
      if(this.cyrrency_left=="韩元"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number
+          this.cyrrency_result=this.cyrrency_number*0.005835
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.1412
+          this.cyrrency_result=this.cyrrency_number*0.0008252
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*15.1857
+          this.cyrrency_result=this.cyrrency_number*0.08819
         }
         else if(this.cyrrency_right=="韩元"){
-          this.cyrrency_result=this.cyrrency_number*170.8798
+          this.cyrrency_result=this.cyrrency_number
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.1119
+          this.cyrrency_result=this.cyrrency_number*0.0006679
         }
     }
      if(this.cyrrency_left=="英镑"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*0.005852
+          this.cyrrency_result=this.cyrrency_number*8.7366
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.0008264
+          this.cyrrency_result=this.cyrrency_number*1.2356
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*0.08887
+          this.cyrrency_result=this.cyrrency_number*132.0486
         }
         else if(this.cyrrency_right=="韩元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.0006551
+          this.cyrrency_result=this.cyrrency_number*1497.3371
         }
      }
+      var date=new Date()
+      var hour = date.getHours();
+      var min=date.getMinutes();
+      var sec=date.getSeconds();
+      var time=hour+":"+min+":"+sec
+      console.log(time)
+      var comment = this.cyrrency_result;
+      console.log(comment)
+      this.$http
+        .post(
+          'http://localhost:3000/api/Stu/addStu2',
+          {
+            record_time: time,
+            record_comment: comment
+          },
+          {}
+        )
+        .then(response => {
+          console.log(response);
+        }).catch((e)=>{
+          console.log("失败")
+        });
     }
   }
 };

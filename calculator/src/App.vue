@@ -8,7 +8,7 @@
 </template>
 <script>
 import Element from 'element-ui'
-import CommentHeader from "./components/CommentHeader";
+import CommentHeader from "./components/CommentHeader"
 import Vue from 'vue'
 Vue.use(Element)
 export default {

@@ -22,7 +22,7 @@ router.post('/addStu', (req, res) => {
     const sql = $sql.Stu.add
     const params = req.body
     console.log('添加', params)
-    conn.query(sql, [params.stu_name, params.stu_sex, params.stu_college, params.stu_class], function (err, result) {
+    conn.query(sql, [params.stu_Id,params.stu_name, params.stu_sex, params.stu_college, params.stu_class], function (err, result) {
         if (err) {
             console.log(err)
         }
