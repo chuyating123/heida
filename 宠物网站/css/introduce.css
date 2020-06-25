@@ -1,0 +1,40 @@
+.introduce{
+    width: 100%;
+    list-style: none;
+}
+.introduce li{
+  width: 100%;
+  height: 300px;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+.introduce img{
+    margin-top: 40px;
+    float: left;
+}
+.desc{
+    width: 250px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 250px;
+}
+.dog1{
+    position: absolute;
+    left: 100px;
+    width: 500px;
+    height: 300px;
+}
+.dog2{
+    position: absolute;
+    right: 100px;
+    width: 500px;
+    height: 300px;
+}
+/* .desc p{
+    float: left;
+    margin-right: 10px;
+} */
+/* .decs span{
+    margin-right: 20px;
+} */
+
