@@ -221,6 +221,7 @@
 <script>
 import Vue from "vue";
 import { Message } from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 export default {
   data() {
     return {
@@ -236,7 +237,7 @@ export default {
       isweight: false,
       isrectangle: false,
       iscircle: false,
-      istrapezoid:false,
+      istrapezoid: false,
       iscuboid: false,
       isbool: false,
       base_number: " ",
@@ -266,11 +267,11 @@ export default {
       rectangle_result: " ",
       circle_number: " ",
       circle_result: " ",
-      trapezoid_top:" ",
-      trapezoid_bottom:" ",
-      trapezoid_tall:" ",
-      trapezoid_number:" ",
-      trapezoid_result:" ",
+      trapezoid_top: " ",
+      trapezoid_bottom: " ",
+      trapezoid_tall: " ",
+      trapezoid_number: " ",
+      trapezoid_result: " ",
       cuboid_length: " ",
       cuboid_width: " ",
       cuboid_tall: " ",
@@ -355,13 +356,19 @@ export default {
         (this.isweight = true);
     },
     rectangle_change() {
-      (this.isrectangle = true), (this.iscircle = false),this.istrapezoid=false;
+      (this.isrectangle = true),
+        (this.iscircle = false),
+        (this.istrapezoid = false);
     },
     circle_change() {
-      (this.isrectangle = false), (this.iscircle = true),this.istrapezoid=false;
+      (this.isrectangle = false),
+        (this.iscircle = true),
+        (this.istrapezoid = false);
     },
-    trapezoid_change(){
-      (this.isrectangle = false), (this.iscircle = false),this.istrapezoid=true;
+    trapezoid_change() {
+      (this.isrectangle = false),
+        (this.iscircle = false),
+        (this.istrapezoid = true);
     },
     cuboid_change() {
       (this.iscuboid = true), (this.isbool = false);
@@ -371,36 +378,36 @@ export default {
     },
     exponentiation() {
       if (this.base_number == 0) {
-        console.log("底数不能为0");
+        Message({ message: "底数不能为0", center: true });
       } else {
         this.exponentiation_result = Math.pow(
           this.base_number,
           this.index_number
         );
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.exponentiation_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
       }
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.exponentiation_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
     },
     get_triangle() {
       if (this.triangle_symbol == "sin") {
@@ -766,175 +773,210 @@ export default {
         });
     },
     rectangle_area() {
-      this.rectangle_result = this.rectangle_length * this.rectangle_width;
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.rectangle_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
+      if (this.rectangle_length < 0 || this.rectangle_width < 0) {
+        Message({ message: "长度或宽度不能小于0", center: true });
+      } else {
+        this.rectangle_result = this.rectangle_length * this.rectangle_width;
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.rectangle_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
+      }
     },
     circle_area() {
-      this.circle_result = (
-        Math.PI *
-        this.circle_number *
-        this.circle_number
-      ).toFixed(6);
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.circle_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
+      if (this.circle_number < 0) {
+        Message({ message: "半径不能小于0", center: true });
+      } else {
+        this.circle_result = (
+          Math.PI *
+          this.circle_number *
+          this.circle_number
+        ).toFixed(6);
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.circle_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
+      }
     },
-    trapezoid_area(){
-    this.trapezoid_result=(1/2)*(parseInt(this.trapezoid_top)+parseInt(this.trapezoid_bottom))*this.trapezoid_tall
-    var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.trapezoid_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
+    trapezoid_area() {
+      if (
+        this.trapezoid_top < 0 ||
+        this.trapezoid_bottom < 0 ||
+        this.trapezoid_tall < 0
+      ) {
+        Message({ message: "上底、下底或高不能小于0", center: true });
+      } else {
+        this.trapezoid_result =
+          (1 / 2) *
+          (parseInt(this.trapezoid_top) + parseInt(this.trapezoid_bottom)) *
+          this.trapezoid_tall;
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.trapezoid_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
+      }
     },
     cuboid_area() {
-      this.cuboid_result =
-        this.cuboid_length * this.cuboid_width * this.cuboid_tall;
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.cuboid_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
+      if (
+        this.cuboid_width < 0 ||
+        this.cuboid_tall < 0 ||
+        this.cuboid_length < 0
+      ) {
+        Message({ message: "长、宽或高不能小于0", center: true });
+      } else {
+        this.cuboid_result =
+          this.cuboid_length * this.cuboid_width * this.cuboid_tall;
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.cuboid_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
+      }
     },
     bool_area() {
-      this.bool_result = (
-        (4 / 3) *
-        Math.PI *
-        this.bool_number *
-        this.bool_number *
-        this.bool_number
-      ).toFixed(6);
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.bool_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
+      if (this.bool_number < 0) {
+        Message({ message: "半径不能小于0", center: true });
+      } else {
+        this.bool_result = (
+          (4 / 3) *
+          Math.PI *
+          this.bool_number *
+          this.bool_number *
+          this.bool_number
+        ).toFixed(6);
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.bool_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
+      }
     },
     get_factorial() {
-      var j = 1;
-      for (var i = 1; i <= this.factorial_number; i++) {
-        j *= i;
+      if (this.factorial_number < 0) {
+        Message({ message: "该数不能计算阶乘", center: true });
+      } else {
+        var j = 1;
+        for (var i = 1; i <= this.factorial_number; i++) {
+          j *= i;
+        }
+        this.factorial_result = j;
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var time = hour + ":" + min + ":" + sec;
+        console.log(time);
+        var comment = this.factorial_result;
+        console.log(comment);
+        this.$http
+          .post(
+            "http://localhost:3000/api/Stu/addStu1",
+            {
+              record_time: time,
+              record_comment: comment
+            },
+            {}
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(e => {
+            console.log("失败");
+          });
       }
-      this.factorial_result = j;
-      var date = new Date();
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var time = hour + ":" + min + ":" + sec;
-      console.log(time);
-      var comment = this.factorial_result;
-      console.log(comment);
-      this.$http
-        .post(
-          "http://localhost:3000/api/Stu/addStu1",
-          {
-            record_time: time,
-            record_comment: comment
-          },
-          {}
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          console.log("失败");
-        });
     }
   }
 };

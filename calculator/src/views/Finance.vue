@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui';
 export default {
   data() {
     return {
@@ -105,7 +106,11 @@ export default {
       this.ishuobi=true
     },
     get_deposit(){
-      this.deposit_result=(this.deposit_principal*this.deposit_time*this.deposit_rate*0.01).toFixed(9)
+      if(this.deposit_principal<0||this.deposit_time<0||this.deposit_rate<0){
+        Message({message:'本金、周期或利率不能小于0',center:true})
+      }
+      else{
+      this.deposit_result=(this.deposit_principal*this.deposit_time*this.deposit_rate*0.01).toFixed(6)
        var date=new Date()
       var hour = date.getHours();
       var min=date.getMinutes();
@@ -128,8 +133,13 @@ export default {
         }).catch((e)=>{
           console.log("失败")
         });
+      }
     },
     get_loans(){
+      if(this.loans_principal<0||this.loans_time<0||this.loans_rate<0){
+        Message({message:'本金、周期或利率不能小于0',center:true})
+      }
+      else{
       this.loans_result=(this.loans_principal*this.loans_time*this.loans_rate*0.01).toFixed(9)
         var date=new Date()
       var hour = date.getHours();
@@ -153,6 +163,7 @@ export default {
         }).catch((e)=>{
           console.log("失败")
         });
+      }
     },
     get_cyrrency(){
       if(this.cyrrency_left=="美元"){

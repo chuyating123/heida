@@ -1,0 +1,10 @@
+div{
+    margin: auto;
+    position: absolute;
+    left: 500px;
+    top: 30px;
+}
+div video{
+    width: 600px;
+    height: 400px;
+}
