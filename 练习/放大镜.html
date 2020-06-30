@@ -61,7 +61,8 @@
       var odrag=document.getElementById("drag");
       var obigbox=document.getElementById("big-box");
       var obigimg=document.getElementById("big-img");
-      osmallbox.onmouseover=function(){
+      osmallbox.onmouseover=function(e){
+        e=e||window.event;
         odrag.style.display="inline";
       }
       osmallbox.onmousemove=function(e){
