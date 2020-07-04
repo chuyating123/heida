@@ -25,7 +25,7 @@ export default {
     }
   },
   created() {
-    axio.get("https://bird.ioliu.cn/v1?url=https://douban.uieee.com/v2/movie/in_theaters?start=0&count=10")
+    axio.get('https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10')
       .then((res) => {
         this.movielist = res.data.subjects;
       })

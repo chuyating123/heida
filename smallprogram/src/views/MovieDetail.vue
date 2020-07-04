@@ -34,6 +34,7 @@ export default {
           this.$route.query.id
       )
       .then((res) => {
+        console.log(res)
         this.movie = res.data;
         this.isloading=false
       })
