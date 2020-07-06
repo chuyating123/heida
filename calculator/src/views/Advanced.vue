@@ -432,7 +432,7 @@ export default {
       var sec = date.getSeconds();
       var time = hour + ":" + min + ":" + sec;
       console.log(time);
-      var comment = this.triangle_number;
+      var comment = this.triangle_result;
       console.log(comment);
       this.$http
         .post(
@@ -845,9 +845,9 @@ export default {
         Message({ message: "上底、下底或高不能小于0", center: true });
       } else {
         this.trapezoid_result =
-          (1 / 2) *
-          (parseInt(this.trapezoid_top) + parseInt(this.trapezoid_bottom)) *
-          this.trapezoid_tall;
+          ((1 / 2) *
+          (parseFloat(this.trapezoid_top) + parseFloat(this.trapezoid_bottom)) *
+          this.trapezoid_tall).toFixed(6);
         var date = new Date();
         var hour = date.getHours();
         var min = date.getMinutes();

@@ -8,6 +8,10 @@ import Record from '../views/Record'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path: '/',
+      redirect:'/Home'
+    },
   {
     path: '/Home',
     name: 'Home',

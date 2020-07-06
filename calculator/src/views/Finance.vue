@@ -140,7 +140,7 @@ export default {
         Message({message:'本金、周期或利率不能小于0',center:true})
       }
       else{
-      this.loans_result=(this.loans_principal*this.loans_time*this.loans_rate*0.01).toFixed(9)
+      this.loans_result=(this.loans_principal*this.loans_time*this.loans_rate*0.01).toFixed(6)
         var date=new Date()
       var hour = date.getHours();
       var min=date.getMinutes();
@@ -168,19 +168,19 @@ export default {
     get_cyrrency(){
       if(this.cyrrency_left=="美元"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*7.081
+          this.cyrrency_result=(this.cyrrency_number*7.081).toFixed(6)
         }
         else if(this.cyrrency_right=="美元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*107.53
+          this.cyrrency_result=(this.cyrrency_number*107.53).toFixed(6)
         }
         else if(this.cyrrency_right=="韩元"){
-          this.cyrrency_result=this.cyrrency_number*1210
+          this.cyrrency_result=(this.cyrrency_number*1210).toFixed(6)
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.7927
+          this.cyrrency_result=(this.cyrrency_number*0.7927).toFixed(6)
         }
       }
       if(this.cyrrency_left=="人民币"){
@@ -188,67 +188,67 @@ export default {
           this.cyrrency_result=this.cyrrency_number
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.1412
+          this.cyrrency_result=(this.cyrrency_number*0.1412).toFixed(6)
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*15.1857
+          this.cyrrency_result=(this.cyrrency_number*15.1857).toFixed(6)
         }
         else if(this.cyrrency_right=="韩元"){
-          this.cyrrency_result=this.cyrrency_number*170.8798
+          this.cyrrency_result=(this.cyrrency_number*170.8798).toFixed(6)
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.1119
+          this.cyrrency_result=(this.cyrrency_number*0.1119).toFixed(6)
         }
       }
       if(this.cyrrency_left=="日元"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*0.06616
+          this.cyrrency_result=(this.cyrrency_number*0.06616).toFixed(6)
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.009357
+          this.cyrrency_result=(this.cyrrency_number*0.009357).toFixed(6)
         }
         else if(this.cyrrency_right=="日元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else if(this.cyrrency_right=="韩元"){
-          this.cyrrency_result=this.cyrrency_number*11.3393
+          this.cyrrency_result=(this.cyrrency_number*11.3393).toFixed(6)
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.007573
+          this.cyrrency_result=(this.cyrrency_number*0.007573).toFixed(6)
         }
     }
      if(this.cyrrency_left=="韩元"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*0.005835
+          this.cyrrency_result=(this.cyrrency_number*0.005835).toFixed(6)
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*0.0008252
+          this.cyrrency_result=(this.cyrrency_number*0.0008252).toFixed(6)
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*0.08819
+          this.cyrrency_result=(this.cyrrency_number*0.08819).toFixed(6)
         }
         else if(this.cyrrency_right=="韩元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*0.0006679
+          this.cyrrency_result=(this.cyrrency_number*0.0006679).toFixed(6)
         }
     }
      if(this.cyrrency_left=="英镑"){
         if(this.cyrrency_right=="人民币"){
-          this.cyrrency_result=this.cyrrency_number*8.7366
+          this.cyrrency_result=(this.cyrrency_number*8.7366).toFixed(6)
         }
         else if(this.cyrrency_right=="美元"){
-          this.cyrrency_result=this.cyrrency_number*1.2356
+          this.cyrrency_result=(this.cyrrency_number*1.2356).toFixed(6)
         }
         else if(this.cyrrency_right=="日元"){
-          this.cyrrency_result=this.cyrrency_number*132.0486
+          this.cyrrency_result=(this.cyrrency_number*132.0486).toFixed(6)
         }
         else if(this.cyrrency_right=="韩元"){
           this.cyrrency_result=this.cyrrency_number
         }
         else{
-          this.cyrrency_result=this.cyrrency_number*1497.3371
+          this.cyrrency_result=(this.cyrrency_number*1497.3371).toFixed(6)
         }
      }
       var date=new Date()
