@@ -66,7 +66,7 @@ export default {
         } else {
           this.isOperatorAdd = false;
         }
-        this.result += "" + character; //印好的作业是变成字符串
+        this.result += "" + character; 
       }
       if (this.isOperator(character) && !this.isOperatorAdd) {
         this.result += "" + character;

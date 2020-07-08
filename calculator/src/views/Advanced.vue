@@ -56,7 +56,7 @@
         <div class="choose">
           <input type="radio" name="unit" value="length" @click="length_change" />长度
           <input type="radio" name="unit" value="area" @click="area_change" />面积
-          <input type="radio" name="unit" value="volume" @click="volume_change" checked />体积
+          <input type="radio" name="unit" value="volume" @click="volume_change"/>体积
           <input type="radio" name="unit" value="weight" @click="weight_change" />重量
         </div>
         <ul class="length-detail">
