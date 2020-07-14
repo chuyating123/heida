@@ -90,9 +90,7 @@ export default {
       console.log(time)
       var comment = this.result;
       console.log(comment)
-      this.$http
-        .post(
-          'http://localhost:3000/api/Stu/addStu',
+      this.$http.post('http://localhost:3000/api/Stu/addStu',
           {
             record_time: time,
             record_comment: comment

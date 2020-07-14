@@ -380,10 +380,7 @@ export default {
       if (this.base_number == 0) {
         Message({ message: "底数不能为0", center: true });
       } else {
-        this.exponentiation_result = Math.pow(
-          this.base_number,
-          this.index_number
-        );
+        this.exponentiation_result = Math.pow(this.base_number,this.index_number);
         var date = new Date();
         var hour = date.getHours();
         var min = date.getMinutes();
